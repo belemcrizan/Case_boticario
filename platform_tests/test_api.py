@@ -258,6 +258,26 @@ def test_error_correlation_security_headers_no_pii(client):
     assert client.get("/api/v1/metrics").status_code == 403
 
 
+def test_streamed_multipart_without_content_length_is_bounded(tmp_path, input_files):
+    from platform_api.api import create_app
+    from platform_api.config import Settings
+
+    app = create_app(Settings(environment="test", data_dir=tmp_path, max_request_bytes=1024))
+    with TestClient(app) as client:
+        login = client.post("/api/v1/auth/demo-session", json={"profile": "operator"})
+        client.headers["X-CSRF-Token"] = login.json()["csrf_token"]
+        request = client.build_request("POST", "/api/v1/validations", files=input_files)
+        raw = request.read()
+        assert len(raw) > 1024
+        response = client.post(
+            "/api/v1/validations",
+            content=iter([raw[:512], raw[512:]]),
+            headers={"Content-Type": request.headers["Content-Type"], "Transfer-Encoding": "chunked"},
+        )
+        assert "Content-Length" not in response.request.headers
+        assert response.status_code == 413 and response.json()["code"] == "UPLOAD_TOO_LARGE"
+
+
 def test_completed_cannot_retry(client):
     assert client.post("/api/v1/reconciliations/demo-strict/retry").status_code == 409
 

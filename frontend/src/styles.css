@@ -148,7 +148,8 @@ select {
 .skip-link {
   position: fixed;
   top: -80px;
-  left: 270px;
+  left: 16px;
+  max-width: calc(100vw - 32px);
   padding: 12px;
   background: var(--accent);
   z-index: 100;
@@ -2770,10 +2771,10 @@ code {
 }
 @media (max-width: 760px) {
   .sidebar:not(.sidebar-open) {
-    visibility: hidden;
+    display: none;
   }
   .sidebar-open {
-    visibility: visible;
+    display: flex;
   }
 }
 

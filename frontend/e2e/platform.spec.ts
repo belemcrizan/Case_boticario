@@ -106,7 +106,23 @@ test('responsivo, menu móvel, modo escuro e ausência de overflow', async ({ pa
       .slice(0, 15),
   );
   expect(overflow).toEqual([]);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  const geometry = await page.evaluate(() => ({
+    viewport: innerWidth,
+    document: document.documentElement.scrollWidth,
+    body: document.body.scrollWidth,
+    overflowing: [...document.querySelectorAll('body *')]
+      .filter((e) => e.scrollWidth > e.clientWidth + 1)
+      .map((e) => ({
+        tag: e.tagName,
+        class: String(e.className),
+        scroll: e.scrollWidth,
+        client: e.clientWidth,
+        visibility: getComputedStyle(e).visibility,
+        display: getComputedStyle(e).display,
+      }))
+      .slice(0, 25),
+  }));
+  expect(geometry.document, JSON.stringify(geometry)).toBeLessThanOrEqual(geometry.viewport);
   await accessible(page);
   await shot(page, '07-dashboard-mobile');
   await page.getByRole('button', { name: 'Abrir menu' }).click();

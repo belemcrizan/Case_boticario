@@ -16,6 +16,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response, StreamingRes
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 from starlette.datastructures import UploadFile
 from starlette.exceptions import HTTPException
+from starlette.formparsers import MultiPartException
 
 from otm_guard.ingest import SCHEMAS
 
@@ -112,6 +113,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.exception_handler(HTTPException)
     async def http_error(request: Request, exc: HTTPException):
+        if exc.detail == "UPLOAD_TOTAL_TOO_LARGE":
+            return error_response(request, 413, "UPLOAD_TOO_LARGE", "Envio excede 128 MiB.")
         return error_response(request, exc.status_code, "HTTP_ERROR", str(exc.detail))
 
     @app.middleware("http")
@@ -183,6 +186,21 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def upload_directory(request: Request):
         seen = set()
         total = 0
+        received = 0
+        original_receive = request._receive
+
+        async def limited_receive():
+            nonlocal received
+            message = await original_receive()
+            if message["type"] == "http.request":
+                received += len(message.get("body", b""))
+                if received > settings.max_request_bytes:
+                    # MultipartException também fecha temporários abertos pelo parser.
+                    raise MultiPartException("UPLOAD_TOTAL_TOO_LARGE")
+            return message
+
+        # Conta bytes reais, inclusive quando Content-Length não existe ou diverge.
+        request._receive = limited_receive
         with tempfile.TemporaryDirectory(prefix="otm-upload-") as folder:
             root = Path(folder)
             async with request.form(
