@@ -26,14 +26,18 @@ from .domain import POLICIES, AppError, Principal
 from .observability import configure_tracing, event, latency, registry, requests_total
 from .repository import Repository, make_engine
 from .schemas import (
+    ArtifactList,
     DecisionView,
     DemoSession,
     ErrorDetail,
     ExampleRequest,
+    InventoryView,
     Page,
     RunView,
     SimulationRequest,
+    SummaryView,
     UserView,
+    ValidationView,
 )
 from .service import Service
 from .storage import LocalStorage, Storage, verified_stream
@@ -254,7 +258,27 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def policies(p: User):
         return {"items": POLICIES, "default": "strict", "homologated": False}
 
-    @app.post("/api/v1/validations", tags=["Importação"])
+    @app.post(
+        "/api/v1/validations",
+        response_model=ValidationView,
+        tags=["Importação"],
+        openapi_extra={
+            "requestBody": {
+                "required": True,
+                "content": {
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "files": {"type": "array", "items": {"type": "string", "format": "binary"}}
+                            },
+                            "required": ["files"],
+                        }
+                    }
+                },
+            }
+        },
+    )
     async def validate_upload(request: Request, p: Operator):
         async with upload_directory(request) as directory:
             return service.validate(directory)
@@ -306,7 +330,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def get_run(run_id: str, p: User):
         return repo.public(repo.get(run_id, p))
 
-    @app.get("/api/v1/reconciliations/{run_id}/summary", tags=["Resultados"])
+    @app.get("/api/v1/reconciliations/{run_id}/summary", response_model=SummaryView, tags=["Resultados"])
     def summary(run_id: str, p: User):
         return ready_run(run_id, p)["summary"]
 
@@ -343,7 +367,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         ready_run(run_id, p)
         return repo.page("decisions", run_id, limit, offset, status="REVISAO")
 
-    @app.get("/api/v1/reconciliations/{run_id}/inventory", tags=["Resultados"])
+    @app.get(
+        "/api/v1/reconciliations/{run_id}/inventory", response_model=Page[InventoryView], tags=["Resultados"]
+    )
     def list_inventory(
         run_id: str,
         p: User,
@@ -355,7 +381,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         ready_run(run_id, p)
         return repo.page("inventory", run_id, limit, offset, search=search, cd=cd, sort="sku")
 
-    @app.get("/api/v1/reconciliations/{run_id}/artifacts", tags=["Auditoria"])
+    @app.get("/api/v1/reconciliations/{run_id}/artifacts", response_model=ArtifactList, tags=["Auditoria"])
     def files(run_id: str, p: User):
         ready_run(run_id, p)
         return {"items": [{k: f[k] for k in ("name", "sha256", "size")} for f in repo.files(run_id)]}
@@ -488,6 +514,7 @@ def serve():
         host=os.getenv("OTM_BIND", "127.0.0.1"),
         port=int(os.getenv("PORT", "8000")),
         proxy_headers=True,
+        access_log=False,
         forwarded_allow_ips="127.0.0.1",
     )
 

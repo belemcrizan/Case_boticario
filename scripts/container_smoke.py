@@ -12,7 +12,7 @@ for attempt in range(45):
         with urllib.request.urlopen(base + "/readyz", timeout=2) as response:
             assert response.status == 200
         break
-    except (urllib.error.URLError, TimeoutError):
+    except (urllib.error.URLError, TimeoutError, ConnectionError):
         time.sleep(1)
 else:
     raise SystemExit("Container não ficou pronto")

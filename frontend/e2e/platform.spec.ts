@@ -24,8 +24,8 @@ test('dashboard, indicadores e acessibilidade', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await login(page);
-  await expect(page.getByText('199', { exact: true })).toBeVisible();
-  await expect(page.getByText('297', { exact: true })).toBeVisible();
+  await expect(page.locator('.kpi-highlight .kpi-value')).toContainText('199');
+  await expect(page.locator('.kpi:first-child .kpi-value')).toContainText('297');
   await accessible(page);
   await shot(page, '01-visao-executiva');
   expect(errors).toEqual([]);
@@ -50,8 +50,8 @@ test('exceção e comparação de políticas reais', async ({ page }) => {
   await expect(page.getByText('SKU-GHOST', { exact: true })).toBeVisible();
   await shot(page, '03-fila-revisao');
   await page.getByRole('button', { name: 'Simulador de políticas' }).click();
-  await expect(page.getByText('269', { exact: true })).toBeVisible();
-  await expect(page.getByText('+70', { exact: true })).toBeVisible();
+  await expect(page.locator('.scenario').nth(1).locator(':scope > b')).toContainText('269');
+  await expect(page.locator('.comparison-result')).toContainText('+70');
   await accessible(page);
   await shot(page, '04-comparacao-politicas');
 });
@@ -76,7 +76,7 @@ test('importação, validação e execução de ponta a ponta', async ({ page })
   await expect(page.getByRole('heading', { name: 'Visão geral da conciliação' })).toBeVisible({
     timeout: 30_000,
   });
-  await expect(page.getByText('199', { exact: true })).toBeVisible();
+  await expect(page.locator('.kpi-highlight .kpi-value')).toContainText('199');
 });
 test('auditoria, integridade e exportação', async ({ page }) => {
   await login(page);
@@ -94,6 +94,18 @@ test('auditoria, integridade e exportação', async ({ page }) => {
 test('responsivo, menu móvel, modo escuro e ausência de overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await login(page);
+  const overflow = await page.evaluate(() =>
+    [...document.querySelectorAll('body *')]
+      .filter((e) => {
+        const r = e.getBoundingClientRect();
+        return (
+          r.right > innerWidth + 1 && getComputedStyle(e).visibility !== 'hidden' && !e.closest('.table-wrap')
+        );
+      })
+      .map((e) => ({ tag: e.tagName, class: e.className, right: e.getBoundingClientRect().right }))
+      .slice(0, 15),
+  );
+  expect(overflow).toEqual([]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await accessible(page);
   await shot(page, '07-dashboard-mobile');

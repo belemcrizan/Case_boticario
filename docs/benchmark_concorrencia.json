@@ -1,0 +1,13 @@
+{
+  "synthetic": true,
+  "processes": 2,
+  "pois_per_process": 10000,
+  "wall_seconds": 1.754438,
+  "both_passed": true,
+  "same_business_metrics": true,
+  "peak_rss_mib_per_process": [
+    50.883,
+    50.883
+  ],
+  "scope": "Execuções independentes em processos e bancos locais distintos. Não é disputa de estoque produtivo; claims concorrentes no mesmo banco têm testes próprios."
+}
