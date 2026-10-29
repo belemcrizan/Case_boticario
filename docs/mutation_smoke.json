@@ -1,0 +1,18 @@
+{
+  "sample_only": true,
+  "mutations": [
+    {
+      "mutation": "stock_credit_instead_of_debit",
+      "killed": true
+    },
+    {
+      "mutation": "skip_packaging_rounding",
+      "killed": true
+    },
+    {
+      "mutation": "skip_strict_policy",
+      "killed": true
+    }
+  ],
+  "all_killed": true
+}

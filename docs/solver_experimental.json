@@ -1,0 +1,79 @@
+{
+  "synthetic": true,
+  "demands_in_kits": [
+    6,
+    2,
+    2,
+    2
+  ],
+  "available_kits": 6,
+  "priority_weights": [
+    1,
+    4,
+    3,
+    2
+  ],
+  "results": [
+    {
+      "objective": "deterministic_lexical",
+      "kits_by_order": [
+        6,
+        0,
+        0,
+        0
+      ],
+      "units": 12,
+      "complete_orders": 1,
+      "minimum_served_fraction": 0.0
+    },
+    {
+      "objective": "max_units",
+      "kits_by_order": [
+        2,
+        0,
+        2,
+        2
+      ],
+      "units": 12,
+      "complete_orders": 2,
+      "minimum_served_fraction": 0.0
+    },
+    {
+      "objective": "max_complete_orders",
+      "kits_by_order": [
+        0,
+        2,
+        2,
+        2
+      ],
+      "units": 12,
+      "complete_orders": 3,
+      "minimum_served_fraction": 0.0
+    },
+    {
+      "objective": "commercial_priority",
+      "kits_by_order": [
+        0,
+        2,
+        2,
+        2
+      ],
+      "units": 12,
+      "complete_orders": 3,
+      "minimum_served_fraction": 0.0
+    },
+    {
+      "objective": "max_min_fraction",
+      "kits_by_order": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "units": 12,
+      "complete_orders": 0,
+      "minimum_served_fraction": 0.5
+    }
+  ],
+  "notice": "MILP experimental. Maximizar unidades, pedidos completos ou equidade são objetivos distintos; não substitui o motor nem homologa prioridades."
+}

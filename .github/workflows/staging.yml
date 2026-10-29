@@ -1,0 +1,58 @@
+name: Preparar candidato GCP staging
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Digite staging para criar um candidato sem tráfego'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  candidate:
+    if: inputs.confirmation == 'staging'
+    environment: staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    env:
+      PROJECT: ${{ vars.GCP_PROJECT_ID }}
+      REGION: ${{ vars.GCP_REGION }}
+      REPOSITORY: ${{ vars.GCP_ARTIFACT_REPOSITORY }}
+      SERVICE: ${{ vars.GCP_SERVICE_NAME }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with: {persist-credentials: false}
+      - name: Exigir gates aprovados no SHA selecionado
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$GITHUB_SHA" > runs.json
+          python - <<'PY'
+          import json,os
+          rows=json.load(open('runs.json'))['workflow_runs']
+          for name in ('Validacao do case','Enterprise quality gates'):
+              candidates=[r for r in rows if r['name']==name and r['head_sha']==os.environ['GITHUB_SHA']]
+              assert candidates and candidates[0]['conclusion']=='success', f'Gate pendente ou reprovado: {name}'
+          PY
+      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db
+      - name: Construir e enviar imagem
+        run: |
+          test -n "$PROJECT" && test -n "$REGION" && test -n "$REPOSITORY" && test -n "$SERVICE"
+          gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+          IMAGE="$REGION-docker.pkg.dev/$PROJECT/$REPOSITORY/otm-guard:$GITHUB_SHA"
+          docker build --build-arg "VCS_REF=$GITHUB_SHA" -t "$IMAGE" .
+          docker push "$IMAGE"
+          DIGEST=$(gcloud artifacts docker images describe "$IMAGE" --format='value(image_summary.digest)')
+          echo "IMAGE_DIGEST=$REGION-docker.pkg.dev/$PROJECT/$REPOSITORY/otm-guard@$DIGEST" >> "$GITHUB_ENV"
+      - name: Implantar revisão sem promover tráfego
+        run: |
+          gcloud run deploy "$SERVICE" --project "$PROJECT" --region "$REGION" --image "$IMAGE_DIGEST" --no-traffic --tag "candidate-$GITHUB_RUN_NUMBER" --quiet
+          echo 'Candidato criado sem promoção. Validar IAP, SQL, Jobs, contratos e rollback conforme runbook.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Nenhum job ou tráfego produtivo foi atualizado por este workflow.' >> "$GITHUB_STEP_SUMMARY"

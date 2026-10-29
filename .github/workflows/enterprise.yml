@@ -24,6 +24,7 @@ jobs:
       - run: .venv/bin/coverage run -m pytest -q
       - run: .venv/bin/coverage report --fail-under=90
       - run: .venv/bin/python scripts/check_examples.py
+      - run: .venv/bin/python -m scripts.export_openapi --check
       - run: .venv/bin/pip-audit --require-hashes -r requirements-api.lock --format json --output python-audit.json
       - run: .venv/bin/cyclonedx-py requirements requirements-api.lock --output-file sbom-python.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -79,7 +80,12 @@ jobs:
       - run: terraform -chdir=infra validate -json > terraform-validation.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
-        with: {name: terraform-validation, path: terraform-validation.json}
+        with:
+          name: terraform-validation
+          include-hidden-files: true
+          path: |
+            terraform-validation.json
+            infra/.terraform.lock.hcl
   container:
     runs-on: ubuntu-24.04
     timeout-minutes: 20

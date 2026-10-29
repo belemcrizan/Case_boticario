@@ -16,6 +16,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response, StreamingRes
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 from starlette.datastructures import UploadFile
 from starlette.exceptions import HTTPException
+from starlette.formparsers import MultiPartException
 
 from otm_guard.ingest import SCHEMAS
 
@@ -26,14 +27,18 @@ from .domain import POLICIES, AppError, Principal
 from .observability import configure_tracing, event, latency, registry, requests_total
 from .repository import Repository, make_engine
 from .schemas import (
+    ArtifactList,
     DecisionView,
     DemoSession,
     ErrorDetail,
     ExampleRequest,
+    InventoryView,
     Page,
     RunView,
     SimulationRequest,
+    SummaryView,
     UserView,
+    ValidationView,
 )
 from .service import Service
 from .storage import LocalStorage, Storage, verified_stream
@@ -108,6 +113,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.exception_handler(HTTPException)
     async def http_error(request: Request, exc: HTTPException):
+        if exc.detail == "UPLOAD_TOTAL_TOO_LARGE":
+            return error_response(request, 413, "UPLOAD_TOO_LARGE", "Envio excede 128 MiB.")
         return error_response(request, exc.status_code, "HTTP_ERROR", str(exc.detail))
 
     @app.middleware("http")
@@ -179,6 +186,21 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def upload_directory(request: Request):
         seen = set()
         total = 0
+        received = 0
+        original_receive = request._receive
+
+        async def limited_receive():
+            nonlocal received
+            message = await original_receive()
+            if message["type"] == "http.request":
+                received += len(message.get("body", b""))
+                if received > settings.max_request_bytes:
+                    # MultipartException também fecha temporários abertos pelo parser.
+                    raise MultiPartException("UPLOAD_TOTAL_TOO_LARGE")
+            return message
+
+        # Conta bytes reais, inclusive quando Content-Length não existe ou diverge.
+        request._receive = limited_receive
         with tempfile.TemporaryDirectory(prefix="otm-upload-") as folder:
             root = Path(folder)
             async with request.form(
@@ -254,7 +276,27 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def policies(p: User):
         return {"items": POLICIES, "default": "strict", "homologated": False}
 
-    @app.post("/api/v1/validations", tags=["Importação"])
+    @app.post(
+        "/api/v1/validations",
+        response_model=ValidationView,
+        tags=["Importação"],
+        openapi_extra={
+            "requestBody": {
+                "required": True,
+                "content": {
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "files": {"type": "array", "items": {"type": "string", "format": "binary"}}
+                            },
+                            "required": ["files"],
+                        }
+                    }
+                },
+            }
+        },
+    )
     async def validate_upload(request: Request, p: Operator):
         async with upload_directory(request) as directory:
             return service.validate(directory)
@@ -306,7 +348,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def get_run(run_id: str, p: User):
         return repo.public(repo.get(run_id, p))
 
-    @app.get("/api/v1/reconciliations/{run_id}/summary", tags=["Resultados"])
+    @app.get("/api/v1/reconciliations/{run_id}/summary", response_model=SummaryView, tags=["Resultados"])
     def summary(run_id: str, p: User):
         return ready_run(run_id, p)["summary"]
 
@@ -343,7 +385,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         ready_run(run_id, p)
         return repo.page("decisions", run_id, limit, offset, status="REVISAO")
 
-    @app.get("/api/v1/reconciliations/{run_id}/inventory", tags=["Resultados"])
+    @app.get(
+        "/api/v1/reconciliations/{run_id}/inventory", response_model=Page[InventoryView], tags=["Resultados"]
+    )
     def list_inventory(
         run_id: str,
         p: User,
@@ -355,7 +399,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         ready_run(run_id, p)
         return repo.page("inventory", run_id, limit, offset, search=search, cd=cd, sort="sku")
 
-    @app.get("/api/v1/reconciliations/{run_id}/artifacts", tags=["Auditoria"])
+    @app.get("/api/v1/reconciliations/{run_id}/artifacts", response_model=ArtifactList, tags=["Auditoria"])
     def files(run_id: str, p: User):
         ready_run(run_id, p)
         return {"items": [{k: f[k] for k in ("name", "sha256", "size")} for f in repo.files(run_id)]}
@@ -488,6 +532,7 @@ def serve():
         host=os.getenv("OTM_BIND", "127.0.0.1"),
         port=int(os.getenv("PORT", "8000")),
         proxy_headers=True,
+        access_log=False,
         forwarded_allow_ips="127.0.0.1",
     )
 

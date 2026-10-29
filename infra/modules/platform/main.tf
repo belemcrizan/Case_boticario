@@ -1,6 +1,7 @@
 terraform {
   required_providers {
-    google = { source = "hashicorp/google" }
+    google      = { source = "hashicorp/google" }
+    google-beta = { source = "hashicorp/google-beta" }
   }
 }
 
@@ -212,7 +213,7 @@ resource "google_cloud_run_v2_service" "app" {
   depends_on = [google_cloud_run_v2_job.worker, google_project_iam_member.runtime_roles]
 }
 resource "google_project_service_identity" "iap" {
-  provider   = google
+  provider   = google-beta
   project    = var.project_id
   service    = "iap.googleapis.com"
   depends_on = [google_project_service.apis]

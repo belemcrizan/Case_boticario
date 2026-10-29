@@ -259,7 +259,12 @@ export default function Overview({
           </button>
         }
       >
-        <div className="table-wrap">
+        <div
+          className="table-wrap"
+          role="region"
+          aria-label="Tabela de dados, use as setas para rolar"
+          tabIndex={0}
+        >
           <table className="data-table">
             <thead>
               <tr>

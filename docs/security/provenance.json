@@ -1,0 +1,33 @@
+{
+  "source_sha": "e945671e08dd4ef49bee308dd6883ab8956b6cf7",
+  "workflow_run": "https://github.com/belemcrizan/Case_boticario/actions/runs/40907929789",
+  "date": "2026-10-29",
+  "python_tests": 93,
+  "python_subtests": 634,
+  "coverage_percent": 93.9,
+  "engine_coverage_percent": 100,
+  "component_tests": 13,
+  "playwright_journeys": 7,
+  "automated_axe_violations": 0,
+  "terraform_valid": true,
+  "critical_image_findings": 0,
+  "gcp_deploy_tested": false,
+  "production_homologated": false,
+  "files_sha256": {
+    "docs/screenshots/02-detalhe-decisao.png": "b125d73f170240a37bb82930afdd120efefb95093bbf8e83325a73e061c1d108",
+    "docs/screenshots/05-importacao-validada.png": "aa285e7ebfea51c20d2f0e6031070e3f6735f6210a39caa2698f5e916746cd0d",
+    "docs/screenshots/09-arquitetura-gcp.png": "45915105537ab0a3dc8334d385cc0bda343b0f5906563c41496444e83932900c",
+    "docs/screenshots/03-fila-revisao.png": "27d4ab24699c585faa4807571ec2f02811365615e730137eed3f5cc1183b3c6b",
+    "docs/screenshots/08-estoque-mobile-escuro.png": "645cfe01920acf9f72f9010f1fd1bd3ae6503aabb54e82fdfd68c1eda93873a2",
+    "docs/screenshots/01-visao-executiva.png": "d841258d5d311ee222da4700ca8f89474c59c334c0d95b2c9ae341733bd9ff40",
+    "docs/screenshots/06-qualidade-auditoria.png": "5b1373f1cb886b02dbe0775d865e3d29cd118825141f046f08dd82ecc897d790",
+    "docs/screenshots/04-comparacao-politicas.png": "bf4f29c09ecbc347e6f1061df2a62791ed9cb2da64ab52329ded24bbac8aaf4b",
+    "docs/screenshots/07-dashboard-mobile.png": "f98776ba9ade66c260d94ac4d65f5112a6cd411b554913041d90c345b7793271",
+    "docs/security/sbom-node.json": "a4e112e717e64f9afe77e70d16a19a33341c415318f66348ceae441b645a2217",
+    "docs/security/sbom-python.json": "29645aca81ebf1df5927c39151c1873df8783b3b924af876ef50f8a45e8e3b41",
+    "docs/security/trivy-image.json": "550fd9c632b9402fd8c25bda74ac28292227840965382f7074286d8a303fc0a1",
+    "docs/security/python-audit.json": "9ea81d65783447fb026e848a2c7e2cd1933744c0df64d303525384a0670a84eb",
+    "docs/security/README.md": "f868745f853800a867d1111f87585d4194e4113e9473fa4c494b92c5864afd6c",
+    "docs/security/terraform-validation.json": "4cd9eddc4d07c5aff74dadb6b3544f98186f6705ac60e0d94d545fc42b45b9b6"
+  }
+}

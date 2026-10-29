@@ -34,7 +34,7 @@ class RunView(BaseModel):
     id: str
     label: str
     policy: Mode
-    state: str
+    state: Literal["UPLOADING", "QUEUED", "RUNNING", "COMPLETED", "FAILED"]
     kind: str
     parent_id: str | None = None
     created_at: float
@@ -78,3 +78,58 @@ class ErrorDetail(BaseModel):
     code: str
     detail: str
     correlation_id: str
+
+
+class InventoryView(BaseModel):
+    cd_origem: str
+    sku: str
+    estoque_05h: int
+    reservado_proposta: int
+    saldo_simulado: int
+
+
+class IssueView(BaseModel):
+    severity: str
+    code: str
+    source: str
+    line: int
+    key: str
+    detail: str
+
+
+class SummaryView(BaseModel):
+    engine_run_id: str
+    engine_version: str
+    platform_version: str
+    metrics: dict[str, int | float | None]
+    checks: dict[str, bool]
+    policy: dict[str, str]
+    requires_review: bool
+    review_state: Literal["PENDING_HUMAN_REVIEW"]
+    snapshot_timestamp: str | None
+    reasons: list[dict[str, str | int]]
+    quality_issues: list[IssueView]
+    inputs_sha256: dict[str, str]
+    cds: list[str]
+    report_scope: dict[str, int]
+    notice: str
+
+
+class ArtifactView(BaseModel):
+    name: str
+    sha256: str
+    size: int
+
+
+class ArtifactList(BaseModel):
+    items: list[ArtifactView]
+
+
+class ValidationView(BaseModel):
+    valid: bool
+    orders: int
+    files: dict[str, str]
+    issues: list[IssueView]
+    preview: list[dict[str, str | int]]
+    snapshot_timestamp: str | None
+    notice: str

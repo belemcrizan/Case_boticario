@@ -53,6 +53,20 @@ def test_quota_does_not_break_idempotent_replay(service):
     assert exc.value.status == 429
 
 
+def test_global_capacity_serializes_different_owners(service):
+    def attempt(index):
+        principal = Principal(f"independent-{index}", "Operador", "operator")
+        try:
+            service.create(ROOT / "data/input", "strict", principal, f"request-{index}", dispatch=False)
+            return 202
+        except AppError as exc:
+            return exc.status
+
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        statuses = list(pool.map(attempt, range(5)))
+    assert statuses.count(202) == 4 and statuses.count(429) == 1
+
+
 def test_missing_inputs_and_failed_dispatch_are_not_published(service):
     with patch.object(service.storage, "put", side_effect=OSError("secret-dsn")):
         with pytest.raises(OSError):

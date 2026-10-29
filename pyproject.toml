@@ -28,7 +28,7 @@ addopts = "-ra"
 
 [tool.coverage.run]
 source = ["platform_api", "otm_guard"]
-omit = ["platform_api/cloud.py", "platform_api/worker.py", "platform_api/manage.py"]
+omit = ["platform_api/worker.py", "platform_api/manage.py"]
 branch = true
 
 [tool.coverage.report]

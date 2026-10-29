@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   ArrowRight,
@@ -122,6 +122,41 @@ export default function App() {
   const [selectedId, setSelectedId] = useState('demo-strict');
   const [decision, setDecision] = useState<Decision | null>(null);
   const [mobileNav, setMobileNav] = useState(false);
+  const menuTrigger = useRef<HTMLButtonElement>(null);
+  const navigation = useRef<HTMLElement>(null);
+  const closeMenu = () => {
+    setMobileNav(false);
+    window.setTimeout(() => menuTrigger.current?.focus(), 0);
+  };
+  useEffect(() => {
+    if (!mobileNav) return;
+    const controls = () =>
+      [...(navigation.current?.querySelectorAll<HTMLElement>('a[href], button:not(:disabled)') ?? [])].filter(
+        (element) => element.getClientRects().length > 0,
+      );
+    controls()[0]?.focus();
+    const keyboard = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setMobileNav(false);
+        window.setTimeout(() => menuTrigger.current?.focus(), 0);
+      }
+      if (event.key === 'Tab') {
+        const focusable = controls();
+        const first = focusable[0];
+        const last = focusable.at(-1);
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', keyboard);
+    return () => document.removeEventListener('keydown', keyboard);
+  }, [mobileNav]);
   const [theme, setTheme] = useState(() => localStorage.getItem('otm-theme') ?? 'light');
   const me = useQuery({ queryKey: ['me'], queryFn: () => api('/me', userSchema) });
   useEffect(() => {
@@ -190,9 +225,16 @@ export default function App() {
         Ir para o conteúdo
       </a>
       {mobileNav && (
-        <button className="nav-backdrop" aria-label="Fechar navegação" onClick={() => setMobileNav(false)} />
+        <button className="nav-backdrop" tabIndex={-1} aria-label="Fechar navegação" onClick={closeMenu} />
       )}
-      <aside className={`sidebar ${mobileNav ? 'sidebar-open' : ''}`}>
+      <aside
+        ref={navigation}
+        className={`sidebar ${mobileNav ? 'sidebar-open' : ''}`}
+        role={mobileNav ? 'dialog' : undefined}
+        aria-modal={mobileNav || undefined}
+        aria-label="Navegação principal"
+        id="primary-navigation"
+      >
         <div className="brand">
           <a
             href="#main-content"
@@ -212,7 +254,7 @@ export default function App() {
             aria-label="Fechar menu"
             onClick={(e) => {
               e.preventDefault();
-              setMobileNav(false);
+              closeMenu();
             }}
           >
             <X size={19} />
@@ -261,12 +303,15 @@ export default function App() {
           <small>v2.0 · Projeto demonstrativo</small>
         </div>
       </aside>
-      <div className="main-shell">
+      <div className="main-shell" inert={mobileNav}>
         <header className="topbar">
           <div className="topbar-left">
             <button
               className="mobile-menu icon-button"
+              ref={menuTrigger}
               aria-label="Abrir menu"
+              aria-expanded={mobileNav}
+              aria-controls="primary-navigation"
               onClick={() => setMobileNav(true)}
             >
               <Menu size={22} />
