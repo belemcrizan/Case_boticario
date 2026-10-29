@@ -1,0 +1,9 @@
+variable "project_id" { type = string }
+variable "region" { type = string }
+variable "environment" { type = string }
+variable "image" { type = string }
+variable "identities" { type = map(string) }
+variable "github_repository" { type = string }
+variable "github_owner_id" { type = string }
+variable "retention_days" { type = number }
+variable "alert_email" { type = string }

@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Contratos, alocacao, CLI e auditoria
-        run: python -m unittest discover -v
+        run: python -m unittest discover -s tests -t . -v
       - name: Reproducao integral dos exemplos
         run: python scripts/check_examples.py
       - name: Compilacao

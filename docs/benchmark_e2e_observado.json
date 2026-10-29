@@ -1,0 +1,233 @@
+{
+  "results": [
+    {
+      "pois": 10000,
+      "seed": 20261029,
+      "synthetic": true,
+      "python": "3.12.14",
+      "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+      "timings_seconds": {
+        "ingestion": 0.32761,
+        "reconcile_excluding_verifier": 0.219433,
+        "verification": 0.163424,
+        "publication_and_object_copy": 0.181995,
+        "sql_persistence": 0.409962,
+        "first_page_query": 0.011725,
+        "total": 1.314185
+      },
+      "peak_process_rss_mib": 50.648,
+      "artifact_bytes": 1607843,
+      "sqlite_bytes": 10997760,
+      "pois_per_second": 7609.28,
+      "checks": {
+        "conservacao_pois": true,
+        "identidade_linhas": true,
+        "inteiros_nao_negativos": true,
+        "limite_demanda_otm": true,
+        "cadastros_obrigatorios": true,
+        "multiplos_caixa": true,
+        "estoque_agregado_cd_sku": true,
+        "combos_proporcionais": true,
+        "politica_combo_estrita": true,
+        "ledger_reconciliado": true
+      },
+      "metrics": {
+        "linhas_oms": 10000,
+        "linhas_otm_associadas": 10000,
+        "linhas_mantidas": 1234,
+        "linhas_ajustadas": 6102,
+        "linhas_zeradas": 2664,
+        "linhas_revisao": 0,
+        "unidades_demandadas": 570907,
+        "unidades_otm": 286159,
+        "unidades_finais": 195060,
+        "unidades_reduzidas_vs_otm": 91099,
+        "retencao_vs_otm_pct": 68.16,
+        "atendimento_demanda_pct": 34.17
+      },
+      "source_sha256": {
+        "app.py": "7552ecbe9bc6963a1e81d0eea4b7177f751ae111e7c6d08dce16ef720fa80240",
+        "otm_guard/__init__.py": "f58a00b5efd8d1478214675eda5eb38cf5aa1dcede25adc70d6a12cb72bf95eb",
+        "otm_guard/cli.py": "e361041cfb95eed71b5e780f3dc37c279d616856cf7d5f54da745a3bc2535310",
+        "otm_guard/engine.py": "5e507e510a5bd00ae7cfc263fab1436905d9d48282ff8f09068f02d4c3977c5e",
+        "otm_guard/ingest.py": "ddb89a97c00023c24057536da506ff0d5d8b88cc34ff090b7429fefe5303ba90",
+        "otm_guard/models.py": "41b15b072703f77740d44791ef49149152e112964cfc0f72443086a47421dd5e",
+        "otm_guard/report.py": "34678ab6ef4a3506caf107aa6af8aa1caa6914b04fcfe41cca92398861be4bc4"
+      },
+      "benchmark_sha256": "6456eac78070cdee619ea24cdcf230762a5a86e85924fec650fe754a7bfdd0ae",
+      "scope": "CSV, motor instrumentado, publicação streaming, cópia local imutável, SQL SQLite e primeira página; geração e verificação extra de hashes fora do total"
+    },
+    {
+      "pois": 100000,
+      "seed": 20261029,
+      "synthetic": true,
+      "python": "3.12.14",
+      "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+      "timings_seconds": {
+        "ingestion": 3.425618,
+        "reconcile_excluding_verifier": 4.150249,
+        "verification": 1.971467,
+        "publication_and_object_copy": 1.808791,
+        "sql_persistence": 3.565136,
+        "first_page_query": 0.013423,
+        "total": 14.934739
+      },
+      "peak_process_rss_mib": 182.855,
+      "artifact_bytes": 15395106,
+      "sqlite_bytes": 109690880,
+      "pois_per_second": 6695.8,
+      "checks": {
+        "conservacao_pois": true,
+        "identidade_linhas": true,
+        "inteiros_nao_negativos": true,
+        "limite_demanda_otm": true,
+        "cadastros_obrigatorios": true,
+        "multiplos_caixa": true,
+        "estoque_agregado_cd_sku": true,
+        "combos_proporcionais": true,
+        "politica_combo_estrita": true,
+        "ledger_reconciliado": true
+      },
+      "metrics": {
+        "linhas_oms": 100000,
+        "linhas_otm_associadas": 100000,
+        "linhas_mantidas": 12525,
+        "linhas_ajustadas": 61679,
+        "linhas_zeradas": 25796,
+        "linhas_revisao": 0,
+        "unidades_demandadas": 5711942,
+        "unidades_otm": 2871130,
+        "unidades_finais": 1965240,
+        "unidades_reduzidas_vs_otm": 905890,
+        "retencao_vs_otm_pct": 68.45,
+        "atendimento_demanda_pct": 34.41
+      },
+      "source_sha256": {
+        "app.py": "7552ecbe9bc6963a1e81d0eea4b7177f751ae111e7c6d08dce16ef720fa80240",
+        "otm_guard/__init__.py": "f58a00b5efd8d1478214675eda5eb38cf5aa1dcede25adc70d6a12cb72bf95eb",
+        "otm_guard/cli.py": "e361041cfb95eed71b5e780f3dc37c279d616856cf7d5f54da745a3bc2535310",
+        "otm_guard/engine.py": "5e507e510a5bd00ae7cfc263fab1436905d9d48282ff8f09068f02d4c3977c5e",
+        "otm_guard/ingest.py": "ddb89a97c00023c24057536da506ff0d5d8b88cc34ff090b7429fefe5303ba90",
+        "otm_guard/models.py": "41b15b072703f77740d44791ef49149152e112964cfc0f72443086a47421dd5e",
+        "otm_guard/report.py": "34678ab6ef4a3506caf107aa6af8aa1caa6914b04fcfe41cca92398861be4bc4"
+      },
+      "benchmark_sha256": "6456eac78070cdee619ea24cdcf230762a5a86e85924fec650fe754a7bfdd0ae",
+      "scope": "CSV, motor instrumentado, publicação streaming, cópia local imutável, SQL SQLite e primeira página; geração e verificação extra de hashes fora do total"
+    },
+    {
+      "pois": 500000,
+      "seed": 20261029,
+      "synthetic": true,
+      "python": "3.12.14",
+      "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+      "timings_seconds": {
+        "ingestion": 18.321651,
+        "reconcile_excluding_verifier": 15.489631,
+        "verification": 9.643046,
+        "publication_and_object_copy": 8.487036,
+        "sql_persistence": 19.168819,
+        "first_page_query": 0.042928,
+        "total": 71.153218
+      },
+      "peak_process_rss_mib": 751.605,
+      "artifact_bytes": 76652034,
+      "sqlite_bytes": 548327424,
+      "pois_per_second": 7027.09,
+      "checks": {
+        "conservacao_pois": true,
+        "identidade_linhas": true,
+        "inteiros_nao_negativos": true,
+        "limite_demanda_otm": true,
+        "cadastros_obrigatorios": true,
+        "multiplos_caixa": true,
+        "estoque_agregado_cd_sku": true,
+        "combos_proporcionais": true,
+        "politica_combo_estrita": true,
+        "ledger_reconciliado": true
+      },
+      "metrics": {
+        "linhas_oms": 500000,
+        "linhas_otm_associadas": 500000,
+        "linhas_mantidas": 62439,
+        "linhas_ajustadas": 307261,
+        "linhas_zeradas": 130300,
+        "linhas_revisao": 0,
+        "unidades_demandadas": 28481766,
+        "unidades_otm": 14261057,
+        "unidades_finais": 9732768,
+        "unidades_reduzidas_vs_otm": 4528289,
+        "retencao_vs_otm_pct": 68.25,
+        "atendimento_demanda_pct": 34.17
+      },
+      "source_sha256": {
+        "app.py": "7552ecbe9bc6963a1e81d0eea4b7177f751ae111e7c6d08dce16ef720fa80240",
+        "otm_guard/__init__.py": "f58a00b5efd8d1478214675eda5eb38cf5aa1dcede25adc70d6a12cb72bf95eb",
+        "otm_guard/cli.py": "e361041cfb95eed71b5e780f3dc37c279d616856cf7d5f54da745a3bc2535310",
+        "otm_guard/engine.py": "5e507e510a5bd00ae7cfc263fab1436905d9d48282ff8f09068f02d4c3977c5e",
+        "otm_guard/ingest.py": "ddb89a97c00023c24057536da506ff0d5d8b88cc34ff090b7429fefe5303ba90",
+        "otm_guard/models.py": "41b15b072703f77740d44791ef49149152e112964cfc0f72443086a47421dd5e",
+        "otm_guard/report.py": "34678ab6ef4a3506caf107aa6af8aa1caa6914b04fcfe41cca92398861be4bc4"
+      },
+      "benchmark_sha256": "6456eac78070cdee619ea24cdcf230762a5a86e85924fec650fe754a7bfdd0ae",
+      "scope": "CSV, motor instrumentado, publicação streaming, cópia local imutável, SQL SQLite e primeira página; geração e verificação extra de hashes fora do total"
+    },
+    {
+      "pois": 1000000,
+      "seed": 20261029,
+      "synthetic": true,
+      "python": "3.12.14",
+      "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+      "timings_seconds": {
+        "ingestion": 34.924824,
+        "reconcile_excluding_verifier": 31.652419,
+        "verification": 18.232526,
+        "publication_and_object_copy": 20.61986,
+        "sql_persistence": 46.80098,
+        "first_page_query": 0.07874,
+        "total": 152.30945
+      },
+      "peak_process_rss_mib": 1456.527,
+      "artifact_bytes": 153208316,
+      "sqlite_bytes": 1097080832,
+      "pois_per_second": 6565.58,
+      "checks": {
+        "conservacao_pois": true,
+        "identidade_linhas": true,
+        "inteiros_nao_negativos": true,
+        "limite_demanda_otm": true,
+        "cadastros_obrigatorios": true,
+        "multiplos_caixa": true,
+        "estoque_agregado_cd_sku": true,
+        "combos_proporcionais": true,
+        "politica_combo_estrita": true,
+        "ledger_reconciliado": true
+      },
+      "metrics": {
+        "linhas_oms": 1000000,
+        "linhas_otm_associadas": 1000000,
+        "linhas_mantidas": 124868,
+        "linhas_ajustadas": 614737,
+        "linhas_zeradas": 260395,
+        "linhas_revisao": 0,
+        "unidades_demandadas": 56962962,
+        "unidades_otm": 28540279,
+        "unidades_finais": 19479288,
+        "unidades_reduzidas_vs_otm": 9060991,
+        "retencao_vs_otm_pct": 68.25,
+        "atendimento_demanda_pct": 34.2
+      },
+      "source_sha256": {
+        "app.py": "7552ecbe9bc6963a1e81d0eea4b7177f751ae111e7c6d08dce16ef720fa80240",
+        "otm_guard/__init__.py": "f58a00b5efd8d1478214675eda5eb38cf5aa1dcede25adc70d6a12cb72bf95eb",
+        "otm_guard/cli.py": "e361041cfb95eed71b5e780f3dc37c279d616856cf7d5f54da745a3bc2535310",
+        "otm_guard/engine.py": "5e507e510a5bd00ae7cfc263fab1436905d9d48282ff8f09068f02d4c3977c5e",
+        "otm_guard/ingest.py": "ddb89a97c00023c24057536da506ff0d5d8b88cc34ff090b7429fefe5303ba90",
+        "otm_guard/models.py": "41b15b072703f77740d44791ef49149152e112964cfc0f72443086a47421dd5e",
+        "otm_guard/report.py": "34678ab6ef4a3506caf107aa6af8aa1caa6914b04fcfe41cca92398861be4bc4"
+      },
+      "benchmark_sha256": "6456eac78070cdee619ea24cdcf230762a5a86e85924fec650fe754a7bfdd0ae",
+      "scope": "CSV, motor instrumentado, publicação streaming, cópia local imutável, SQL SQLite e primeira página; geração e verificação extra de hashes fora do total"
+    }
+  ],
+  "complete": true
+}

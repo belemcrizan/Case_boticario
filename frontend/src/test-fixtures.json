@@ -1,0 +1,940 @@
+{
+  "user": {
+    "name": "Analista de operações",
+    "role": "operator",
+    "csrf_token": "wIFc_rQZ-jkYgA-GqESMj7Hi83SIQ2ag96WwCHROpe8",
+    "environment": "test"
+  },
+  "runs": {
+    "items": [
+      {
+        "id": "demo-complete-kits",
+        "label": "Case original · Kits completos",
+        "policy": "complete-kits",
+        "state": "COMPLETED",
+        "kind": "PROPOSAL",
+        "parent_id": null,
+        "created_at": 1793285673.0395787,
+        "updated_at": 1793285673.0665424,
+        "attempt": 1,
+        "summary": {
+          "engine_run_id": "790d9c3066b09c061c8089f27356c53469746b046641968420350893ce0f71d4",
+          "engine_version": "1.0.0",
+          "platform_version": "2.0.0",
+          "metrics": {
+            "linhas_oms": 12,
+            "linhas_otm_associadas": 11,
+            "linhas_mantidas": 6,
+            "linhas_ajustadas": 4,
+            "linhas_zeradas": 1,
+            "linhas_revisao": 1,
+            "unidades_demandadas": 455,
+            "unidades_otm": 297,
+            "unidades_finais": 269,
+            "unidades_reduzidas_vs_otm": 28,
+            "retencao_vs_otm_pct": 90.57,
+            "atendimento_demanda_pct": 59.12
+          },
+          "checks": {
+            "conservacao_pois": true,
+            "identidade_linhas": true,
+            "inteiros_nao_negativos": true,
+            "limite_demanda_otm": true,
+            "cadastros_obrigatorios": true,
+            "multiplos_caixa": true,
+            "estoque_agregado_cd_sku": true,
+            "combos_proporcionais": true,
+            "politica_combo_estrita": true,
+            "ledger_reconciliado": true
+          },
+          "policy": {
+            "incomplete_policy": "complete-kits",
+            "version": "1.0.0"
+          },
+          "requires_review": true,
+          "review_state": "PENDING_HUMAN_REVIEW",
+          "snapshot_timestamp": null,
+          "reasons": [
+            {
+              "code": "POLITICA_PRESERVAR_KITS_COMPLETOS",
+              "count": 4
+            },
+            {
+              "code": "AJUSTE_COMBO_COMPLETO",
+              "count": 3
+            },
+            {
+              "code": "ARREDONDAMENTO_CAIXA_PARA_BAIXO",
+              "count": 2
+            },
+            {
+              "code": "EMBALAGEM_AUSENTE",
+              "count": 1
+            },
+            {
+              "code": "ESTOQUE_AUSENTE",
+              "count": 1
+            },
+            {
+              "code": "OTM_AUSENTE",
+              "count": 1
+            },
+            {
+              "code": "DEMANDA_ZERO",
+              "count": 1
+            },
+            {
+              "code": "OTM_ZERO",
+              "count": 1
+            }
+          ],
+          "quality_issues": [
+            {
+              "severity": "INFO",
+              "code": "ESPACO_NORMALIZADO",
+              "source": "pedidos_oms.csv",
+              "line": 11,
+              "key": "POI-1010",
+              "detail": "Espaços externos removidos do campo sku"
+            },
+            {
+              "severity": "INFO",
+              "code": "ESPACO_NORMALIZADO",
+              "source": "saidas_otm.csv",
+              "line": 11,
+              "key": "POI-1010",
+              "detail": "Espaços externos removidos do campo sku"
+            },
+            {
+              "severity": "WARNING",
+              "code": "COMBO_DUPLICADO_REMOVIDO",
+              "source": "de_para_combos.csv",
+              "line": 8,
+              "key": "CMB-SKIN-01/SKU-E2",
+              "detail": "Duplicata idêntica removida; proporção não somada"
+            }
+          ],
+          "inputs_sha256": {
+            "pedidos_oms.csv": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "saidas_otm.csv": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "foto_estoque_cd_05h.csv": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "de_para_combos.csv": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "regras_embalagem.csv": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995"
+          },
+          "cds": ["CD_BA", "CD_MG", "CD_PR", "CD_SP"],
+          "report_scope": {
+            "displayed_rows": 12,
+            "total_rows": 12
+          },
+          "notice": "Proposta para conferência. Não há reserva ou envio ao OMS."
+        },
+        "failure": null,
+        "timings": {
+          "ingestion": 0.002224,
+          "reconcile_and_verify": 0.000206,
+          "publication": 0.006278,
+          "total_before_persistence": 0.011497,
+          "persistence": 0.004207,
+          "total": 0.015721
+        },
+        "snapshot": null
+      },
+      {
+        "id": "demo-strict",
+        "label": "Case original · Conservadora",
+        "policy": "strict",
+        "state": "COMPLETED",
+        "kind": "PROPOSAL",
+        "parent_id": null,
+        "created_at": 1793285672.9597769,
+        "updated_at": 1793285673.0260642,
+        "attempt": 1,
+        "summary": {
+          "engine_run_id": "eaef0c553f967363efbab1577af379dbfa688b22a79931a66be4cdf884f6cf4e",
+          "engine_version": "1.0.0",
+          "platform_version": "2.0.0",
+          "metrics": {
+            "linhas_oms": 12,
+            "linhas_otm_associadas": 11,
+            "linhas_mantidas": 5,
+            "linhas_ajustadas": 3,
+            "linhas_zeradas": 3,
+            "linhas_revisao": 1,
+            "unidades_demandadas": 455,
+            "unidades_otm": 297,
+            "unidades_finais": 199,
+            "unidades_reduzidas_vs_otm": 98,
+            "retencao_vs_otm_pct": 67.0,
+            "atendimento_demanda_pct": 43.74
+          },
+          "checks": {
+            "conservacao_pois": true,
+            "identidade_linhas": true,
+            "inteiros_nao_negativos": true,
+            "limite_demanda_otm": true,
+            "cadastros_obrigatorios": true,
+            "multiplos_caixa": true,
+            "estoque_agregado_cd_sku": true,
+            "combos_proporcionais": true,
+            "politica_combo_estrita": true,
+            "ledger_reconciliado": true
+          },
+          "policy": {
+            "incomplete_policy": "strict",
+            "version": "1.0.0"
+          },
+          "requires_review": true,
+          "review_state": "PENDING_HUMAN_REVIEW",
+          "snapshot_timestamp": null,
+          "reasons": [
+            {
+              "code": "COMBO_LOTE_INCOMPLETO_ZERADO",
+              "count": 2
+            },
+            {
+              "code": "AJUSTE_COMBO_COMPLETO",
+              "count": 2
+            },
+            {
+              "code": "ARREDONDAMENTO_CAIXA_PARA_BAIXO",
+              "count": 2
+            },
+            {
+              "code": "EMBALAGEM_AUSENTE",
+              "count": 1
+            },
+            {
+              "code": "ESTOQUE_AUSENTE",
+              "count": 1
+            },
+            {
+              "code": "OTM_AUSENTE",
+              "count": 1
+            },
+            {
+              "code": "DEMANDA_ZERO",
+              "count": 1
+            },
+            {
+              "code": "OTM_ZERO",
+              "count": 1
+            }
+          ],
+          "quality_issues": [
+            {
+              "severity": "INFO",
+              "code": "ESPACO_NORMALIZADO",
+              "source": "pedidos_oms.csv",
+              "line": 11,
+              "key": "POI-1010",
+              "detail": "Espaços externos removidos do campo sku"
+            },
+            {
+              "severity": "INFO",
+              "code": "ESPACO_NORMALIZADO",
+              "source": "saidas_otm.csv",
+              "line": 11,
+              "key": "POI-1010",
+              "detail": "Espaços externos removidos do campo sku"
+            },
+            {
+              "severity": "WARNING",
+              "code": "COMBO_DUPLICADO_REMOVIDO",
+              "source": "de_para_combos.csv",
+              "line": 8,
+              "key": "CMB-SKIN-01/SKU-E2",
+              "detail": "Duplicata idêntica removida; proporção não somada"
+            }
+          ],
+          "inputs_sha256": {
+            "pedidos_oms.csv": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "saidas_otm.csv": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "foto_estoque_cd_05h.csv": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "de_para_combos.csv": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "regras_embalagem.csv": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995"
+          },
+          "cds": ["CD_BA", "CD_MG", "CD_PR", "CD_SP"],
+          "report_scope": {
+            "displayed_rows": 12,
+            "total_rows": 12
+          },
+          "notice": "Proposta para conferência. Não há reserva ou envio ao OMS."
+        },
+        "failure": null,
+        "timings": {
+          "ingestion": 0.002848,
+          "reconcile_and_verify": 0.000603,
+          "publication": 0.005549,
+          "total_before_persistence": 0.015963,
+          "persistence": 0.007727,
+          "total": 0.023755
+        },
+        "snapshot": null
+      }
+    ],
+    "total": 2,
+    "limit": 20,
+    "offset": 0
+  },
+  "decisions": {
+    "items": [
+      {
+        "poi_id": "POI-1001",
+        "pedido_id": "PED-1001",
+        "cd_origem": "CD_SP",
+        "cod_franqueado": "FRANQ-01",
+        "sku": "SKU-A1",
+        "qtd_pedida": 50,
+        "qtd_sugerida_otm": 50,
+        "qtd_final": 0,
+        "status": "ZERADO",
+        "combo_id": "CMB-MAES-01",
+        "reasons": ["COMBO_LOTE_INCOMPLETO_ZERADO"],
+        "explanation": "Política estrita: lote proporcional inviável foi zerado. Cada kit contém 1 peça(s) deste SKU; a proposta representa 0 kits completos.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 50,
+          "otm_cap": 50,
+          "initial_stock": 100,
+          "packaging_multiple": 1,
+          "fractionation_allowed": true,
+          "combo_components": {
+            "SKU-A1": 1,
+            "SKU-A2": 1
+          },
+          "combo_rule": "Zerar se incompleto",
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-A1"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_SP/SKU-A1"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1001"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-A1"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1001"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1002",
+        "pedido_id": "PED-1001",
+        "cd_origem": "CD_SP",
+        "cod_franqueado": "FRANQ-01",
+        "sku": "SKU-A2",
+        "qtd_pedida": 50,
+        "qtd_sugerida_otm": 35,
+        "qtd_final": 0,
+        "status": "ZERADO",
+        "combo_id": "CMB-MAES-01",
+        "reasons": ["COMBO_LOTE_INCOMPLETO_ZERADO"],
+        "explanation": "Política estrita: lote proporcional inviável foi zerado. Cada kit contém 1 peça(s) deste SKU; a proposta representa 0 kits completos.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 50,
+          "otm_cap": 35,
+          "initial_stock": 35,
+          "packaging_multiple": 1,
+          "fractionation_allowed": true,
+          "combo_components": {
+            "SKU-A1": 1,
+            "SKU-A2": 1
+          },
+          "combo_rule": "Zerar se incompleto",
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-A2"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_SP/SKU-A2"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1002"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-A2"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1002"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1003",
+        "pedido_id": "PED-1001",
+        "cd_origem": "CD_SP",
+        "cod_franqueado": "FRANQ-01",
+        "sku": "SKU-B1",
+        "qtd_pedida": 20,
+        "qtd_sugerida_otm": 10,
+        "qtd_final": 10,
+        "status": "MANTIDO",
+        "combo_id": "",
+        "reasons": ["SEM_AJUSTE"],
+        "explanation": "Sugestão já atende às restrições.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 20,
+          "otm_cap": 10,
+          "initial_stock": 10,
+          "packaging_multiple": 1,
+          "fractionation_allowed": true,
+          "combo_components": {},
+          "combo_rule": null,
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-B1"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_SP/SKU-B1"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1003"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-B1"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1003"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1004",
+        "pedido_id": "PED-1002",
+        "cd_origem": "CD_PR",
+        "cod_franqueado": "FRANQ-02",
+        "sku": "SKU-K1",
+        "qtd_pedida": 10,
+        "qtd_sugerida_otm": 5,
+        "qtd_final": 3,
+        "status": "AJUSTADO",
+        "combo_id": "CMB-BARBA-01",
+        "reasons": ["AJUSTE_COMBO_COMPLETO"],
+        "explanation": "Redução ao maior número de kits completos compatível. Cada kit contém 1 peça(s) deste SKU; a proposta representa 3 kits completos.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 10,
+          "otm_cap": 5,
+          "initial_stock": 5,
+          "packaging_multiple": 1,
+          "fractionation_allowed": true,
+          "combo_components": {
+            "SKU-K1": 1,
+            "SKU-K2": 2
+          },
+          "combo_rule": "Ajustar para maior combo completo",
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-K1"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_PR/SKU-K1"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1004"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-K1"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1004"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1005",
+        "pedido_id": "PED-1002",
+        "cd_origem": "CD_PR",
+        "cod_franqueado": "FRANQ-02",
+        "sku": "SKU-K2",
+        "qtd_pedida": 20,
+        "qtd_sugerida_otm": 7,
+        "qtd_final": 6,
+        "status": "AJUSTADO",
+        "combo_id": "CMB-BARBA-01",
+        "reasons": ["AJUSTE_COMBO_COMPLETO"],
+        "explanation": "Redução ao maior número de kits completos compatível. Cada kit contém 2 peça(s) deste SKU; a proposta representa 3 kits completos.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 20,
+          "otm_cap": 7,
+          "initial_stock": 7,
+          "packaging_multiple": 1,
+          "fractionation_allowed": true,
+          "combo_components": {
+            "SKU-K1": 1,
+            "SKU-K2": 2
+          },
+          "combo_rule": "Ajustar para maior combo completo",
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-K2"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_PR/SKU-K2"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1005"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-K2"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1005"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1006",
+        "pedido_id": "PED-1003",
+        "cd_origem": "CD_BA",
+        "cod_franqueado": "FRANQ-03",
+        "sku": "SKU-D1",
+        "qtd_pedida": 10,
+        "qtd_sugerida_otm": 8,
+        "qtd_final": 0,
+        "status": "ZERADO",
+        "combo_id": "",
+        "reasons": ["ARREDONDAMENTO_CAIXA_PARA_BAIXO"],
+        "explanation": "Quantidade reduzida ao múltiplo inferior da caixa. O OTM sugeriu 8 peças. A caixa exige 12. A proposta contém 0 peças, equivalentes a 0 caixas.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 10,
+          "otm_cap": 8,
+          "initial_stock": 8,
+          "packaging_multiple": 12,
+          "fractionation_allowed": false,
+          "combo_components": {},
+          "combo_rule": null,
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-D1"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_BA/SKU-D1"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1006"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-D1"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1006"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1007",
+        "pedido_id": "PED-1003",
+        "cd_origem": "CD_BA",
+        "cod_franqueado": "FRANQ-03",
+        "sku": "SKU-D2",
+        "qtd_pedida": 120,
+        "qtd_sugerida_otm": 110,
+        "qtd_final": 108,
+        "status": "AJUSTADO",
+        "combo_id": "",
+        "reasons": ["ARREDONDAMENTO_CAIXA_PARA_BAIXO"],
+        "explanation": "Quantidade reduzida ao múltiplo inferior da caixa. O OTM sugeriu 110 peças. A caixa exige 6. A proposta contém 108 peças, equivalentes a 18 caixas.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 120,
+          "otm_cap": 110,
+          "initial_stock": 150,
+          "packaging_multiple": 6,
+          "fractionation_allowed": false,
+          "combo_components": {},
+          "combo_rule": null,
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-D2"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_BA/SKU-D2"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1007"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-D2"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1007"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1008",
+        "pedido_id": "PED-1004",
+        "cd_origem": "CD_SP",
+        "cod_franqueado": "FRANQ-04",
+        "sku": "SKU-E1",
+        "qtd_pedida": 30,
+        "qtd_sugerida_otm": 30,
+        "qtd_final": 30,
+        "status": "MANTIDO",
+        "combo_id": "CMB-SKIN-01",
+        "reasons": ["SEM_AJUSTE"],
+        "explanation": "Sugestão já atende às restrições. Cada kit contém 1 peça(s) deste SKU; a proposta representa 30 kits completos.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 30,
+          "otm_cap": 30,
+          "initial_stock": 50,
+          "packaging_multiple": 1,
+          "fractionation_allowed": true,
+          "combo_components": {
+            "SKU-E1": 1,
+            "SKU-E2": 1
+          },
+          "combo_rule": "Zerar se incompleto",
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-E1"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_SP/SKU-E1"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1008"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-E1"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1008"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1009",
+        "pedido_id": "PED-1004",
+        "cd_origem": "CD_SP",
+        "cod_franqueado": "FRANQ-04",
+        "sku": "SKU-E2",
+        "qtd_pedida": 30,
+        "qtd_sugerida_otm": 30,
+        "qtd_final": 30,
+        "status": "MANTIDO",
+        "combo_id": "CMB-SKIN-01",
+        "reasons": ["SEM_AJUSTE"],
+        "explanation": "Sugestão já atende às restrições. Cada kit contém 1 peça(s) deste SKU; a proposta representa 30 kits completos.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 30,
+          "otm_cap": 30,
+          "initial_stock": 50,
+          "packaging_multiple": 1,
+          "fractionation_allowed": true,
+          "combo_components": {
+            "SKU-E1": 1,
+            "SKU-E2": 1
+          },
+          "combo_rule": "Zerar se incompleto",
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-E2"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_SP/SKU-E2"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1009"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-E2"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1009"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1010",
+        "pedido_id": "PED-1005",
+        "cd_origem": "CD_SP",
+        "cod_franqueado": "FRANQ-05",
+        "sku": "SKU-X1",
+        "qtd_pedida": 15,
+        "qtd_sugerida_otm": 12,
+        "qtd_final": 12,
+        "status": "MANTIDO",
+        "combo_id": "",
+        "reasons": ["SEM_AJUSTE"],
+        "explanation": "Sugestão já atende às restrições. O OTM sugeriu 12 peças. A caixa exige 6. A proposta contém 12 peças, equivalentes a 2 caixas.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 15,
+          "otm_cap": 12,
+          "initial_stock": 20,
+          "packaging_multiple": 6,
+          "fractionation_allowed": false,
+          "combo_components": {},
+          "combo_rule": null,
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-X1"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_SP/SKU-X1"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1010"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-X1"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1010"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1011",
+        "pedido_id": "PED-1006",
+        "cd_origem": "CD_SP",
+        "cod_franqueado": "FRANQ-06",
+        "sku": "SKU-GHOST",
+        "qtd_pedida": 100,
+        "qtd_sugerida_otm": null,
+        "qtd_final": 0,
+        "status": "REVISAO",
+        "combo_id": "",
+        "reasons": ["EMBALAGEM_AUSENTE", "ESTOQUE_AUSENTE", "OTM_AUSENTE"],
+        "explanation": "Não existe regra de embalagem; completar cadastro. Não existe saldo para CD/SKU; confirmar fotografia. POI sem retorno do OTM; confirmar processamento.",
+        "next_action": "Conferir dados ausentes ou divergentes na origem e gerar novo lote.",
+        "constraints": {
+          "demand_cap": 100,
+          "otm_cap": null,
+          "initial_stock": null,
+          "packaging_multiple": null,
+          "fractionation_allowed": null,
+          "combo_components": {},
+          "combo_rule": null,
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-GHOST"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_SP/SKU-GHOST"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1011"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-GHOST"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1011"
+          }
+        ]
+      },
+      {
+        "poi_id": "POI-1012",
+        "pedido_id": "PED-1007",
+        "cd_origem": "CD_MG",
+        "cod_franqueado": "FRANQ-07",
+        "sku": "SKU-B1",
+        "qtd_pedida": 0,
+        "qtd_sugerida_otm": 0,
+        "qtd_final": 0,
+        "status": "MANTIDO",
+        "combo_id": "",
+        "reasons": ["DEMANDA_ZERO", "OTM_ZERO"],
+        "explanation": "Quantidade pedida igual a zero. OTM já sugeriu zero.",
+        "next_action": "Conferir a proposta e homologar a política antes de integrar ao faturamento.",
+        "constraints": {
+          "demand_cap": 0,
+          "otm_cap": 0,
+          "initial_stock": 0,
+          "packaging_multiple": 1,
+          "fractionation_allowed": true,
+          "combo_components": {},
+          "combo_rule": null,
+          "policy": "strict",
+          "stock_snapshot_timestamp": null
+        },
+        "input_references": [
+          {
+            "file": "de_para_combos.csv",
+            "sha256": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+            "key": "SKU-B1"
+          },
+          {
+            "file": "foto_estoque_cd_05h.csv",
+            "sha256": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+            "key": "CD_MG/SKU-B1"
+          },
+          {
+            "file": "pedidos_oms.csv",
+            "sha256": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+            "key": "POI-1012"
+          },
+          {
+            "file": "regras_embalagem.csv",
+            "sha256": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+            "key": "SKU-B1"
+          },
+          {
+            "file": "saidas_otm.csv",
+            "sha256": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3",
+            "key": "POI-1012"
+          }
+        ]
+      }
+    ],
+    "total": 12,
+    "limit": 20,
+    "offset": 0
+  }
+}
