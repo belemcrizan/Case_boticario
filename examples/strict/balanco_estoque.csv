@@ -1,0 +1,12 @@
+﻿cd_origem,sku,estoque_05h,reservado_proposta,saldo_simulado
+CD_BA,SKU-D1,8,0,8
+CD_BA,SKU-D2,150,108,42
+CD_MG,SKU-B1,0,0,0
+CD_PR,SKU-K1,5,3,2
+CD_PR,SKU-K2,7,6,1
+CD_SP,SKU-A1,100,0,100
+CD_SP,SKU-A2,35,0,35
+CD_SP,SKU-B1,10,10,0
+CD_SP,SKU-E1,50,30,20
+CD_SP,SKU-E2,50,30,20
+CD_SP,SKU-X1,20,12,8

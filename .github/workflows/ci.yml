@@ -1,0 +1,32 @@
+name: Validacao do case
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6 verificado em 2026-10-29
+        with:
+          persist-credentials: false
+      - name: Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6 verificado em 2026-10-29
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Contratos, alocacao, CLI e auditoria
+        run: python -m unittest discover -v
+      - name: Reproducao integral dos exemplos
+        run: python scripts/check_examples.py
+      - name: Compilacao
+        run: python -m compileall -q app.py otm_guard scripts tests

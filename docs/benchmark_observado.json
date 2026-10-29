@@ -1,0 +1,46 @@
+{
+  "checks": {
+    "cadastros_obrigatorios": true,
+    "combos_proporcionais": true,
+    "conservacao_pois": true,
+    "estoque_agregado_cd_sku": true,
+    "identidade_linhas": true,
+    "inteiros_nao_negativos": true,
+    "ledger_reconciliado": true,
+    "limite_demanda_otm": true,
+    "multiplos_caixa": true,
+    "politica_combo_estrita": true
+  },
+  "elapsed_seconds_with_tracemalloc": 10.658081,
+  "groups": 75000,
+  "memory_scope": "alocações Python durante reconcile; exclui Dataset e RSS total",
+  "metrics": {
+    "atendimento_demanda_pct": 30.19,
+    "linhas_ajustadas": 48850,
+    "linhas_mantidas": 13604,
+    "linhas_oms": 100000,
+    "linhas_otm_associadas": 100000,
+    "linhas_revisao": 0,
+    "linhas_zeradas": 37546,
+    "retencao_vs_otm_pct": 60.22,
+    "unidades_demandadas": 3206347,
+    "unidades_finais": 967911,
+    "unidades_otm": 1607206,
+    "unidades_reduzidas_vs_otm": 639295
+  },
+  "peak_additional_traced_mib": 56.45,
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "scope": "motor + verificação; exclui geração, leitura CSV e relatórios",
+  "seed": 20261029,
+  "source_sha256": {
+    "app.py": "7552ecbe9bc6963a1e81d0eea4b7177f751ae111e7c6d08dce16ef720fa80240",
+    "otm_guard/__init__.py": "f58a00b5efd8d1478214675eda5eb38cf5aa1dcede25adc70d6a12cb72bf95eb",
+    "otm_guard/cli.py": "e361041cfb95eed71b5e780f3dc37c279d616856cf7d5f54da745a3bc2535310",
+    "otm_guard/engine.py": "5e507e510a5bd00ae7cfc263fab1436905d9d48282ff8f09068f02d4c3977c5e",
+    "otm_guard/ingest.py": "ddb89a97c00023c24057536da506ff0d5d8b88cc34ff090b7429fefe5303ba90",
+    "otm_guard/models.py": "41b15b072703f77740d44791ef49149152e112964cfc0f72443086a47421dd5e",
+    "otm_guard/report.py": "34678ab6ef4a3506caf107aa6af8aa1caa6914b04fcfe41cca92398861be4bc4"
+  },
+  "synthetic": true
+}

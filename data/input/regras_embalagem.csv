@@ -1,0 +1,11 @@
+sku,marca,multiplo_caixa_master,permite_fracionamento
+SKU-D1,Eudora,12,NÃO
+SKU-D2,Eudora,6,NÃO
+SKU-A1,Boticário,1,SIM
+SKU-A2,Boticário,1,SIM
+SKU-B1,Boticário,1,SIM
+SKU-K1,Boticário,1,SIM
+SKU-K2,Boticário,1,SIM
+SKU-E1,Boticário,1,SIM
+SKU-E2,Boticário,1,SIM
+SKU-X1,Eudora,6,NÃO

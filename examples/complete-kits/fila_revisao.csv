@@ -1,0 +1,2 @@
+﻿poi_id,pedido_id,cd_origem,cod_franqueado,sku,qtd_pedida,qtd_sugerida_otm,qtd_final,status,combo_id,reasons,explicacao
+POI-1011,PED-1006,CD_SP,FRANQ-06,SKU-GHOST,100,,0,REVISAO,,EMBALAGEM_AUSENTE;ESTOQUE_AUSENTE;OTM_AUSENTE,Não existe regra de embalagem; completar cadastro. Não existe saldo para CD/SKU; confirmar fotografia. POI sem retorno do OTM; confirmar processamento.

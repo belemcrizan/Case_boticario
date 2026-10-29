@@ -1,0 +1,40 @@
+{
+  "checks": {
+    "cadastros_obrigatorios": true,
+    "combos_proporcionais": true,
+    "conservacao_pois": true,
+    "estoque_agregado_cd_sku": true,
+    "identidade_linhas": true,
+    "inteiros_nao_negativos": true,
+    "ledger_reconciliado": true,
+    "limite_demanda_otm": true,
+    "multiplos_caixa": true,
+    "politica_combo_estrita": true
+  },
+  "limitations": [
+    "Fotografia sem data; não é estoque em tempo real",
+    "Proposta sem reserva transacional e sem envio ao OMS",
+    "Desempate lexical; não maximiza objetivo global"
+  ],
+  "metrics": {
+    "atendimento_demanda_pct": 43.74,
+    "linhas_ajustadas": 3,
+    "linhas_mantidas": 5,
+    "linhas_oms": 12,
+    "linhas_otm_associadas": 11,
+    "linhas_revisao": 1,
+    "linhas_zeradas": 3,
+    "retencao_vs_otm_pct": 67.0,
+    "unidades_demandadas": 455,
+    "unidades_finais": 199,
+    "unidades_otm": 297,
+    "unidades_reduzidas_vs_otm": 98
+  },
+  "policy": {
+    "incomplete_policy": "strict",
+    "version": "1.0.0"
+  },
+  "requires_review": true,
+  "run_id": "eaef0c553f967363efbab1577af379dbfa688b22a79931a66be4cdf884f6cf4e",
+  "stock_snapshot_timestamp": null
+}

@@ -1,0 +1,33 @@
+{
+  "application_version": "1.0.0",
+  "artifacts_sha256": {
+    "balanco_estoque.csv": "cc26f4d0c5abf3a30b961f7dd30ba346d43c274aab2658b4379d6ba273aa4ad7",
+    "fila_revisao.csv": "ea6b528be12be0a68588822ebd7c666ecdc096b8adb3a1043cf62d4c0d3fa3e2",
+    "proposta_conciliada.csv": "e8c697814dc5d44dc8573d388927a752ed8039a81a5e2823f4519fca24801883",
+    "qualidade_dados.json": "0bd889cc52b4d52305acb23588ac978b9e90efa4b94c79e4bc4f31585fa24eac",
+    "relatorio.html": "416e3292412b48a4af01eaa349cfa779001b69b9eaa5fe6c070562edf0313927",
+    "resumo.json": "3e685ce945b0527dbacd2033961515de9bfea093cd91e1e4b1ca1d30d45ac51e"
+  },
+  "hash_scope": "manifest.json exclui a si próprio para evitar autorreferência",
+  "inputs_sha256": {
+    "de_para_combos.csv": "6bf8a7ae97081e3375dd1d8b4502ffaa023648c72dc3afbafac72fe44b6ee922",
+    "foto_estoque_cd_05h.csv": "f8260e685fba643345b69ce1049af0f4fccf62aa8653af4630feab0ece21fb4c",
+    "pedidos_oms.csv": "3fa47a299e2ee3a64d02adaae2164749624e6a2686766071eb800d3ca6eb6fc3",
+    "regras_embalagem.csv": "cb04ac993d5ac607366e04e9ed44fb4a8675282ec533f7021e72dc38f2b51995",
+    "saidas_otm.csv": "f8e1dcea3c29841ec5814c35a2a29ed60e257fb6b1e328282f95ec7fb82374d3"
+  },
+  "policy": {
+    "incomplete_policy": "strict",
+    "version": "1.0.0"
+  },
+  "run_id": "eaef0c553f967363efbab1577af379dbfa688b22a79931a66be4cdf884f6cf4e",
+  "source_sha256": {
+    "app.py": "7552ecbe9bc6963a1e81d0eea4b7177f751ae111e7c6d08dce16ef720fa80240",
+    "otm_guard/__init__.py": "f58a00b5efd8d1478214675eda5eb38cf5aa1dcede25adc70d6a12cb72bf95eb",
+    "otm_guard/cli.py": "e361041cfb95eed71b5e780f3dc37c279d616856cf7d5f54da745a3bc2535310",
+    "otm_guard/engine.py": "5e507e510a5bd00ae7cfc263fab1436905d9d48282ff8f09068f02d4c3977c5e",
+    "otm_guard/ingest.py": "ddb89a97c00023c24057536da506ff0d5d8b88cc34ff090b7429fefe5303ba90",
+    "otm_guard/models.py": "41b15b072703f77740d44791ef49149152e112964cfc0f72443086a47421dd5e",
+    "otm_guard/report.py": "34678ab6ef4a3506caf107aa6af8aa1caa6914b04fcfe41cca92398861be4bc4"
+  }
+}

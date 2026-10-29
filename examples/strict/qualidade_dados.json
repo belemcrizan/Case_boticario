@@ -1,0 +1,26 @@
+[
+  {
+    "code": "ESPACO_NORMALIZADO",
+    "detail": "Espaços externos removidos do campo sku",
+    "key": "POI-1010",
+    "line": 11,
+    "severity": "INFO",
+    "source": "pedidos_oms.csv"
+  },
+  {
+    "code": "ESPACO_NORMALIZADO",
+    "detail": "Espaços externos removidos do campo sku",
+    "key": "POI-1010",
+    "line": 11,
+    "severity": "INFO",
+    "source": "saidas_otm.csv"
+  },
+  {
+    "code": "COMBO_DUPLICADO_REMOVIDO",
+    "detail": "Duplicata idêntica removida; proporção não somada",
+    "key": "CMB-SKIN-01/SKU-E2",
+    "line": 8,
+    "severity": "WARNING",
+    "source": "de_para_combos.csv"
+  }
+]

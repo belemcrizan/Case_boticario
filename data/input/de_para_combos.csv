@@ -1,0 +1,8 @@
+id_combo_comercial,descricao_combo,sku_componente,proporcao_no_combo,regra_quebra
+CMB-MAES-01,Combo Dia das Mães,SKU-A1,1,Zerar se incompleto
+CMB-MAES-01,Combo Dia das Mães,SKU-A2,1,Zerar se incompleto
+CMB-BARBA-01,Combo Barbeador Pro (1 Aparelho + 2 Cargas),SKU-K1,1,Ajustar para maior combo completo
+CMB-BARBA-01,Combo Barbeador Pro (1 Aparelho + 2 Cargas),SKU-K2,2,Ajustar para maior combo completo
+CMB-SKIN-01,Combo SkinCare Básico,SKU-E1,1,Zerar se incompleto
+CMB-SKIN-01,Combo SkinCare Básico,SKU-E2,1,Zerar se incompleto
+CMB-SKIN-01,Combo SkinCare Básico,SKU-E2,1,Zerar se incompleto

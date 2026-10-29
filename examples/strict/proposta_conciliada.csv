@@ -1,0 +1,13 @@
+﻿poi_id,pedido_id,cd_origem,cod_franqueado,sku,qtd_pedida,qtd_sugerida_otm,qtd_final,status,combo_id,reasons,explicacao
+POI-1001,PED-1001,CD_SP,FRANQ-01,SKU-A1,50,50,0,ZERADO,CMB-MAES-01,COMBO_LOTE_INCOMPLETO_ZERADO,Política estrita: lote proporcional inviável foi zerado.
+POI-1002,PED-1001,CD_SP,FRANQ-01,SKU-A2,50,35,0,ZERADO,CMB-MAES-01,COMBO_LOTE_INCOMPLETO_ZERADO,Política estrita: lote proporcional inviável foi zerado.
+POI-1003,PED-1001,CD_SP,FRANQ-01,SKU-B1,20,10,10,MANTIDO,,SEM_AJUSTE,Sugestão já atende às restrições.
+POI-1004,PED-1002,CD_PR,FRANQ-02,SKU-K1,10,5,3,AJUSTADO,CMB-BARBA-01,AJUSTE_COMBO_COMPLETO,Redução ao maior número de kits completos compatível.
+POI-1005,PED-1002,CD_PR,FRANQ-02,SKU-K2,20,7,6,AJUSTADO,CMB-BARBA-01,AJUSTE_COMBO_COMPLETO,Redução ao maior número de kits completos compatível.
+POI-1006,PED-1003,CD_BA,FRANQ-03,SKU-D1,10,8,0,ZERADO,,ARREDONDAMENTO_CAIXA_PARA_BAIXO,Quantidade reduzida ao múltiplo inferior da caixa.
+POI-1007,PED-1003,CD_BA,FRANQ-03,SKU-D2,120,110,108,AJUSTADO,,ARREDONDAMENTO_CAIXA_PARA_BAIXO,Quantidade reduzida ao múltiplo inferior da caixa.
+POI-1008,PED-1004,CD_SP,FRANQ-04,SKU-E1,30,30,30,MANTIDO,CMB-SKIN-01,SEM_AJUSTE,Sugestão já atende às restrições.
+POI-1009,PED-1004,CD_SP,FRANQ-04,SKU-E2,30,30,30,MANTIDO,CMB-SKIN-01,SEM_AJUSTE,Sugestão já atende às restrições.
+POI-1010,PED-1005,CD_SP,FRANQ-05,SKU-X1,15,12,12,MANTIDO,,SEM_AJUSTE,Sugestão já atende às restrições.
+POI-1011,PED-1006,CD_SP,FRANQ-06,SKU-GHOST,100,,0,REVISAO,,EMBALAGEM_AUSENTE;ESTOQUE_AUSENTE;OTM_AUSENTE,Não existe regra de embalagem; completar cadastro. Não existe saldo para CD/SKU; confirmar fotografia. POI sem retorno do OTM; confirmar processamento.
+POI-1012,PED-1007,CD_MG,FRANQ-07,SKU-B1,0,0,0,MANTIDO,,DEMANDA_ZERO;OTM_ZERO,Quantidade pedida igual a zero. OTM já sugeriu zero.

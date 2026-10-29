@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conciliação pós-OTM | Evidência do lote</title><style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#173c35;background:#f1f5f2;line-height:1.5}
+*{box-sizing:border-box}body{margin:0}main{max-width:1450px;margin:auto;padding:38px 28px}
+header{padding:30px;background:#123e33;color:#fff;border-radius:18px}h1{font-size:30px;margin:6px 0 10px}
+h2{font-size:21px;margin:0 0 14px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#ace5c6}
+header p{max-width:850px;margin:10px 0;color:#dcebe4}.run{font-family:monospace;font-size:12px;overflow-wrap:anywhere}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0}.card,section{background:#fff;border:1px solid #d9e6dc;border-radius:14px;padding:23px}
+.card b{display:block;font-size:33px;line-height:1.2}.card span{display:block;font-size:14px;margin-top:10px;color:#4a635a}
+.notice{background:#fff7db;border-left:5px solid #bd8700;border-radius:10px;padding:17px 21px;margin:20px 0;color:#654710}
+section{margin:22px 0}.toolbar{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+input,select{font:inherit;padding:10px;border:1px solid #a9bdb1;border-radius:7px;max-width:100%}input{min-width:240px}
+.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px;min-width:1050px;text-align:left}
+th{background:#ecf4ee;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:13px 10px}
+td{padding:14px 10px;border-bottom:1px solid #e5ece7;vertical-align:top}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.final{font-weight:750;font-size:16px}.reason{min-width:230px;max-width:420px}small{display:block;color:#5d7166;font-size:11px;margin-top:4px}
+.badge{display:inline-block;padding:4px 8px;border-radius:5px;font-size:10px;font-weight:800;background:#e6efea}
+.REVISAO{background:#fff0c3;color:#7b5100}.ZERADO{background:#fbe2dd;color:#94392c}.AJUSTADO{background:#ddecff;color:#214b83}
+.MANTIDO{background:#dff2e4;color:#246541}.columns{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+ul{padding-left:20px}li{margin:10px 0}footer{font-size:12px;color:#546b5e;padding:10px 0 30px}a{color:#156044}
+[hidden]{display:none!important}@media(max-width:850px){main{padding:18px 12px}.grid{grid-template-columns:1fr 1fr}.columns{grid-template-columns:1fr}header{padding:22px}h1{font-size:25px}}
+@media print{.toolbar{display:none}main{padding:0}.table-wrap{overflow:visible}table{min-width:0;font-size:9px}.reason{min-width:100px}section,header{break-inside:avoid}}
+</style></head><body><main>
+<header><span class="eyebrow">Operações &amp; logística · Case técnico</span>
+<h1>Conciliação pós-OTM</h1><p>Quantidades fisicamente viáveis, decisões explicadas por POI e estoque reconciliado por CD/SKU.</p>
+<p>Política: <strong>Estrita: zerar lote incompleto</strong></p><p class="run">Identificador do lote: eaef0c553f967363efbab1577af379dbfa688b22a79931a66be4cdf884f6cf4e</p></header>
+<div class="grid"><div class="card"><b>297</b><span>peças sugeridas pelo OTM</span></div>
+<div class="card"><b>199</b><span>peças na proposta conciliada</span></div>
+<div class="card"><b>1</b><span>POIs bloqueados para revisão</span></div>
+<div class="card"><b>10/10</b><span>invariantes verificadas</span></div></div>
+<aside class="notice"><strong>Proposta para conferência operacional.</strong> Não constitui reserva de estoque ou autorização de faturamento.
+O saldo é limitado à fotografia das 05h, sem data fornecida. Confirmar a política de combo e a atualidade da foto antes de integrar ao OMS.</aside>
+<section><h2>Decisões por item de pedido</h2><div class="toolbar">
+<label>Buscar <input id="search" type="search" placeholder="POI, SKU, pedido ou motivo"></label>
+<label>Status <select id="status"><option value="">Todos</option><option>MANTIDO</option><option>AJUSTADO</option><option>ZERADO</option><option>REVISAO</option></select></label></div>
+<p id="count" aria-live="polite"></p><div class="table-wrap"><table><thead><tr><th>POI</th><th>Pedido / origem</th><th>SKU / combo</th>
+<th class="num">Pedido</th><th class="num">OTM</th><th class="num">Final</th><th>Status</th><th>Explicação</th></tr></thead><tbody><tr data-status="ZERADO"><td>POI-1001</td><td>PED-1001<small>CD_SP · FRANQ-01</small></td><td>SKU-A1<small>CMB-MAES-01</small></td><td class="num">50</td><td class="num">50</td><td class="num final">0</td><td><span class="badge ZERADO">ZERADO</span></td><td class="reason">Política estrita: lote proporcional inviável foi zerado.</td></tr><tr data-status="ZERADO"><td>POI-1002</td><td>PED-1001<small>CD_SP · FRANQ-01</small></td><td>SKU-A2<small>CMB-MAES-01</small></td><td class="num">50</td><td class="num">35</td><td class="num final">0</td><td><span class="badge ZERADO">ZERADO</span></td><td class="reason">Política estrita: lote proporcional inviável foi zerado.</td></tr><tr data-status="MANTIDO"><td>POI-1003</td><td>PED-1001<small>CD_SP · FRANQ-01</small></td><td>SKU-B1<small>Avulso</small></td><td class="num">20</td><td class="num">10</td><td class="num final">10</td><td><span class="badge MANTIDO">MANTIDO</span></td><td class="reason">Sugestão já atende às restrições.</td></tr><tr data-status="AJUSTADO"><td>POI-1004</td><td>PED-1002<small>CD_PR · FRANQ-02</small></td><td>SKU-K1<small>CMB-BARBA-01</small></td><td class="num">10</td><td class="num">5</td><td class="num final">3</td><td><span class="badge AJUSTADO">AJUSTADO</span></td><td class="reason">Redução ao maior número de kits completos compatível.</td></tr><tr data-status="AJUSTADO"><td>POI-1005</td><td>PED-1002<small>CD_PR · FRANQ-02</small></td><td>SKU-K2<small>CMB-BARBA-01</small></td><td class="num">20</td><td class="num">7</td><td class="num final">6</td><td><span class="badge AJUSTADO">AJUSTADO</span></td><td class="reason">Redução ao maior número de kits completos compatível.</td></tr><tr data-status="ZERADO"><td>POI-1006</td><td>PED-1003<small>CD_BA · FRANQ-03</small></td><td>SKU-D1<small>Avulso</small></td><td class="num">10</td><td class="num">8</td><td class="num final">0</td><td><span class="badge ZERADO">ZERADO</span></td><td class="reason">Quantidade reduzida ao múltiplo inferior da caixa.</td></tr><tr data-status="AJUSTADO"><td>POI-1007</td><td>PED-1003<small>CD_BA · FRANQ-03</small></td><td>SKU-D2<small>Avulso</small></td><td class="num">120</td><td class="num">110</td><td class="num final">108</td><td><span class="badge AJUSTADO">AJUSTADO</span></td><td class="reason">Quantidade reduzida ao múltiplo inferior da caixa.</td></tr><tr data-status="MANTIDO"><td>POI-1008</td><td>PED-1004<small>CD_SP · FRANQ-04</small></td><td>SKU-E1<small>CMB-SKIN-01</small></td><td class="num">30</td><td class="num">30</td><td class="num final">30</td><td><span class="badge MANTIDO">MANTIDO</span></td><td class="reason">Sugestão já atende às restrições.</td></tr><tr data-status="MANTIDO"><td>POI-1009</td><td>PED-1004<small>CD_SP · FRANQ-04</small></td><td>SKU-E2<small>CMB-SKIN-01</small></td><td class="num">30</td><td class="num">30</td><td class="num final">30</td><td><span class="badge MANTIDO">MANTIDO</span></td><td class="reason">Sugestão já atende às restrições.</td></tr><tr data-status="MANTIDO"><td>POI-1010</td><td>PED-1005<small>CD_SP · FRANQ-05</small></td><td>SKU-X1<small>Avulso</small></td><td class="num">15</td><td class="num">12</td><td class="num final">12</td><td><span class="badge MANTIDO">MANTIDO</span></td><td class="reason">Sugestão já atende às restrições.</td></tr><tr data-status="REVISAO"><td>POI-1011</td><td>PED-1006<small>CD_SP · FRANQ-06</small></td><td>SKU-GHOST<small>Avulso</small></td><td class="num">100</td><td class="num">ausente</td><td class="num final">0</td><td><span class="badge REVISAO">REVISAO</span></td><td class="reason">Não existe regra de embalagem; completar cadastro. Não existe saldo para CD/SKU; confirmar fotografia. POI sem retorno do OTM; confirmar processamento.</td></tr><tr data-status="MANTIDO"><td>POI-1012</td><td>PED-1007<small>CD_MG · FRANQ-07</small></td><td>SKU-B1<small>Avulso</small></td><td class="num">0</td><td class="num">0</td><td class="num final">0</td><td><span class="badge MANTIDO">MANTIDO</span></td><td class="reason">Quantidade pedida igual a zero. OTM já sugeriu zero.</td></tr></tbody></table></div></section>
+<div class="columns"><section><h2>Qualidade dos dados</h2><ul><li><strong>ESPACO_NORMALIZADO</strong>: Espaços externos removidos do campo sku <small>pedidos_oms.csv:11 · POI-1010</small></li><li><strong>ESPACO_NORMALIZADO</strong>: Espaços externos removidos do campo sku <small>saidas_otm.csv:11 · POI-1010</small></li><li><strong>COMBO_DUPLICADO_REMOVIDO</strong>: Duplicata idêntica removida; proporção não somada <small>de_para_combos.csv:8 · CMB-SKIN-01/SKU-E2</small></li></ul></section>
+<section><h2>Verificações de saída</h2><ul><li>OK · conservacao_pois</li><li>OK · identidade_linhas</li><li>OK · inteiros_nao_negativos</li><li>OK · limite_demanda_otm</li><li>OK · cadastros_obrigatorios</li><li>OK · multiplos_caixa</li><li>OK · estoque_agregado_cd_sku</li><li>OK · combos_proporcionais</li><li>OK · politica_combo_estrita</li><li>OK · ledger_reconciliado</li></ul></section></div>
+<section><h2>Como interpretar o resultado</h2><p>Redução de peças mede adequação às restrições; não comprova ganho financeiro, redução de trabalho manual ou otimização global.
+Itens em revisão permanecem com zero peças. A prioridade entre pedidos é lexical e reproduzível; não representa uma regra comercial validada.</p>
+<p>O arquivo <a href="proposta_conciliada.csv">proposta_conciliada.csv</a> preserva todos os POIs.
+Consulte também <a href="resumo.json">resumo.json</a>, <a href="qualidade_dados.json">qualidade_dados.json</a> e <a href="manifest.json">manifest.json</a>.</p></section>
+<footer>Motor determinístico · Python padrão · Sem chamadas a modelos ou serviços externos · Versão 1.0.0</footer>
+</main><script>
+const search=document.getElementById('search'),status=document.getElementById('status');
+const rows=[...document.querySelectorAll('tbody tr')];
+function filter(){let shown=0;const query=search.value.toLocaleLowerCase('pt-BR');for(const row of rows){
+row.hidden=!(row.textContent.toLocaleLowerCase('pt-BR').includes(query)&&(!status.value||row.dataset.status===status.value));if(!row.hidden)shown++;}
+document.getElementById('count').textContent=shown+' de '+rows.length+' itens';}
+search.addEventListener('input',filter);status.addEventListener('change',filter);filter();
+</script></body></html>
