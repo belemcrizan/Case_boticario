@@ -2787,3 +2787,8 @@ code {
 .sidebar {
   overflow-y: auto;
 }
+
+.table-wrap:focus-visible {
+  outline: 3px solid #88aa66;
+  outline-offset: -3px;
+}

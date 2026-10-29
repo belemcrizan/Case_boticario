@@ -290,7 +290,12 @@ export function ImportFlow({ user, onCreated }: { user: User; onCreated: (run: R
           )}
           <details className="evidence-details">
             <summary>Prévia de até cinco registros da demanda</summary>
-            <div className="table-wrap">
+            <div
+              className="table-wrap"
+              role="region"
+              aria-label="Tabela de dados, use as setas para rolar"
+              tabIndex={0}
+            >
               <table className="data-table">
                 <thead>
                   <tr>
@@ -478,7 +483,12 @@ export function Policies({
             sub="Quantidades em peças. Até 100 diferenças por consulta."
           >
             {comparison.data.items.length ? (
-              <div className="table-wrap">
+              <div
+                className="table-wrap"
+                role="region"
+                aria-label="Tabela de dados, use as setas para rolar"
+                tabIndex={0}
+              >
                 <table className="data-table">
                   <thead>
                     <tr>
