@@ -126,6 +126,10 @@ test('responsivo, menu móvel, modo escuro e ausência de overflow', async ({ pa
   await accessible(page);
   await shot(page, '07-dashboard-mobile');
   await page.getByRole('button', { name: 'Abrir menu' }).click();
+  await expect(page.getByRole('dialog', { name: 'Navegação principal' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('button', { name: 'Abrir menu' })).toBeFocused();
+  await page.getByRole('button', { name: 'Abrir menu' }).click();
   await page.getByRole('button', { name: 'Estoque por CD' }).click();
   await expect(page.getByRole('heading', { name: 'Estoque e consumo proposto' })).toBeVisible();
   await page.getByRole('button', { name: 'Ativar modo escuro' }).click();
