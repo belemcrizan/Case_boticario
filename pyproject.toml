@@ -1,0 +1,55 @@
+[project]
+name = "otm-guard-platform"
+version = "2.0.0"
+description = "Conciliação pós-OTM com API, auditoria e experiência operacional"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+api = [
+  "fastapi>=0.120,<1", "uvicorn>=0.35,<1", "python-multipart>=0.0.20,<1",
+  "sqlalchemy>=2.0.40,<3", "pydantic>=2.11,<3", "prometheus-client>=0.22,<1",
+]
+gcp = [
+  "google-auth>=2.40,<3", "google-cloud-storage>=3.3,<4",
+  "google-cloud-run>=0.10,<1", "cloud-sql-python-connector[pg8000]>=1.18,<2",
+  "opentelemetry-sdk>=1.35,<2", "opentelemetry-exporter-otlp-proto-http>=1.35,<2",
+]
+dev = [
+  "pytest>=8.4,<10", "httpx>=0.28,<1", "coverage>=7.10,<8",
+  "hypothesis>=6.140,<7", "ruff>=0.13,<1", "mypy>=1.18,<2",
+  "pip-audit>=2.9,<3", "cyclonedx-bom>=7,<8",
+]
+analysis = ["scipy>=1.16,<2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "platform_tests"]
+addopts = "-ra"
+
+[tool.coverage.run]
+source = ["platform_api", "otm_guard"]
+omit = ["platform_api/cloud.py", "platform_api/worker.py", "platform_api/manage.py"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+precision = 1
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+extend-exclude = ["otm_guard", "tests", "app.py", "scripts/benchmark.py", "scripts/check_examples.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["platform_api"]
+check_untyped_defs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["otm_guard.*"]
+follow_imports = "skip"

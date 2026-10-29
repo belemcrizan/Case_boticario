@@ -1,0 +1,113 @@
+import { expect, test, type Page } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import path from 'node:path';
+import fs from 'node:fs';
+
+const screenshots = 'test-results/screenshots';
+async function login(page: Page) {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Acessar como analista' }).click();
+  await expect(page.getByRole('heading', { name: 'Visão geral da conciliação' })).toBeVisible();
+}
+async function shot(page: Page, name: string) {
+  fs.mkdirSync(screenshots, { recursive: true });
+  await page.screenshot({ path: `${screenshots}/${name}.png`, fullPage: true });
+}
+async function accessible(page: Page) {
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+    .analyze();
+  expect(results.violations).toEqual([]);
+}
+
+test('dashboard, indicadores e acessibilidade', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await login(page);
+  await expect(page.getByText('199', { exact: true })).toBeVisible();
+  await expect(page.getByText('297', { exact: true })).toBeVisible();
+  await accessible(page);
+  await shot(page, '01-visao-executiva');
+  expect(errors).toEqual([]);
+});
+test('consulta, filtros, decisão e teclado', async ({ page }) => {
+  await login(page);
+  await page.getByRole('button', { name: 'Conciliação por item' }).click();
+  await page.getByRole('textbox', { name: 'Buscar itens' }).fill('SKU-D2');
+  await expect(page.getByText('POI-1007', { exact: true })).toBeVisible();
+  await expect(page.getByText('POI-1001', { exact: true })).not.toBeVisible();
+  await page.getByRole('button', { name: 'Ver decisão POI-1007' }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.getByRole('dialog')).toContainText('18 caixas');
+  await accessible(page);
+  await shot(page, '02-detalhe-decisao');
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+});
+test('exceção e comparação de políticas reais', async ({ page }) => {
+  await login(page);
+  await page.getByRole('button', { name: /Fila de revisão/ }).click();
+  await expect(page.getByText('SKU-GHOST', { exact: true })).toBeVisible();
+  await shot(page, '03-fila-revisao');
+  await page.getByRole('button', { name: 'Simulador de políticas' }).click();
+  await expect(page.getByText('269', { exact: true })).toBeVisible();
+  await expect(page.getByText('+70', { exact: true })).toBeVisible();
+  await accessible(page);
+  await shot(page, '04-comparacao-politicas');
+});
+test('importação, validação e execução de ponta a ponta', async ({ page }) => {
+  await login(page);
+  await page.getByRole('button', { name: 'Importar lote' }).click();
+  const names = [
+    'pedidos_oms.csv',
+    'saidas_otm.csv',
+    'foto_estoque_cd_05h.csv',
+    'de_para_combos.csv',
+    'regras_embalagem.csv',
+  ];
+  await page
+    .getByLabel('Selecionar cinco arquivos CSV')
+    .setInputFiles(names.map((n) => path.resolve('../data/input', n)));
+  await page.getByRole('button', { name: 'Validar arquivos', exact: true }).click();
+  await expect(page.getByText('Os cinco arquivos atendem ao contrato estrutural.')).toBeVisible();
+  await accessible(page);
+  await shot(page, '05-importacao-validada');
+  await page.getByRole('button', { name: 'Executar conciliação', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Visão geral da conciliação' })).toBeVisible({
+    timeout: 30_000,
+  });
+  await expect(page.getByText('199', { exact: true })).toBeVisible();
+});
+test('auditoria, integridade e exportação', async ({ page }) => {
+  await login(page);
+  await page.getByRole('button', { name: 'Qualidade e auditoria' }).click();
+  await expect(page.getByText('10 invariantes do motor')).toBeVisible();
+  await page.getByRole('button', { name: 'Verificar integridade' }).click();
+  await expect(page.getByText('Os sete artefatos correspondem aos hashes registrados.')).toBeVisible();
+  await accessible(page);
+  await shot(page, '06-qualidade-auditoria');
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('link', { name: 'Baixar proposta_conciliada.csv', exact: true }).click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe('proposta_conciliada.csv');
+});
+test('responsivo, menu móvel, modo escuro e ausência de overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await login(page);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await accessible(page);
+  await shot(page, '07-dashboard-mobile');
+  await page.getByRole('button', { name: 'Abrir menu' }).click();
+  await page.getByRole('button', { name: 'Estoque por CD' }).click();
+  await expect(page.getByRole('heading', { name: 'Estoque e consumo proposto' })).toBeVisible();
+  await page.getByRole('button', { name: 'Ativar modo escuro' }).click();
+  await accessible(page);
+  await shot(page, '08-estoque-mobile-escuro');
+});
+test('perfil de gestão consulta e não executa', async ({ page }) => {
+  await login(page);
+  await page.getByLabel('Perfil demonstrativo').selectOption('viewer');
+  await page.getByRole('button', { name: 'Importar lote' }).click();
+  await expect(page.getByText(/Seu perfil permite consulta/)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Selecionar arquivos', exact: true })).toBeDisabled();
+});

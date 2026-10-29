@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    ports: ["127.0.0.1:8080:8080"]
+    environment:
+      OTM_ENV: demo
+      OTM_PUBLIC_ORIGIN: http://127.0.0.1:8080
+    volumes: ["otm-data:/data"]
+    mem_limit: 4g
+    cpus: 2
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    read_only: true
+    tmpfs: ["/tmp:size=512m,uid=10001,gid=10001"]
+volumes:
+  otm-data:
