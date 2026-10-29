@@ -11,6 +11,10 @@ async function login(page: Page) {
 }
 async function shot(page: Page, name: string) {
   fs.mkdirSync(screenshots, { recursive: true });
+  await page.evaluate(() => {
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    window.scrollTo(0, 0);
+  });
   await page.screenshot({ path: `${screenshots}/${name}.png`, fullPage: true });
 }
 async function accessible(page: Page) {
@@ -138,6 +142,10 @@ test('responsivo, menu móvel, modo escuro e ausência de overflow', async ({ pa
 });
 test('perfil de gestão consulta e não executa', async ({ page }) => {
   await login(page);
+  await page.getByRole('button', { name: 'Arquitetura GCP' }).click();
+  await expect(page.getByRole('heading', { name: 'Arquitetura e implantação' })).toBeVisible();
+  await accessible(page);
+  await shot(page, '09-arquitetura-gcp');
   await page.getByLabel('Perfil demonstrativo').selectOption('viewer');
   await page.getByRole('button', { name: 'Importar lote' }).click();
   await expect(page.getByText(/Seu perfil permite consulta/)).toBeVisible();
