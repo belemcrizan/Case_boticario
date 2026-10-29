@@ -323,7 +323,6 @@ select {
 }
 .main-shell {
   min-width: 0;
-  overflow-x: clip;
   width: calc(100% - 244px);
   margin-left: 244px;
   display: flex;
@@ -889,6 +888,7 @@ select {
   line-height: 1.6;
 }
 .table-wrap {
+  position: relative;
   overflow-x: auto;
   max-width: 100%;
 }
