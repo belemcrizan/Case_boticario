@@ -1,0 +1,11 @@
+# Modelo: substituir todos os placeholders e revisar plan antes de apply autorizado.
+project_id  = "REPLACE_WITH_AUTHORIZED_PROJECT"
+region      = "southamerica-east1"
+environment = "production"
+image       = "REGION-docker.pkg.dev/PROJECT/REPOSITORY/otm-guard@sha256:REPLACE_WITH_VERIFIED_DIGEST"
+identities = {
+  "analista@example.invalid" = "operator"
+  "auditor@example.invalid"  = "auditor"
+}
+alert_email = "operacao@example.invalid"
+retention_days = 30

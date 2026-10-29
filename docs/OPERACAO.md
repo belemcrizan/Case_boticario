@@ -1,5 +1,7 @@
 # Operação, rollout e evolução
 
+> Referência do motor e da CLI originais. A plataforma v2, sua operação e as evidências adicionais estão em [ENTREGA_FINAL.md](ENTREGA_FINAL.md).
+
 ## Executar o demonstrador
 
 ```bash

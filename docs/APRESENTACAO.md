@@ -1,5 +1,7 @@
 # Roteiro de apresentação | 5–7 minutos
 
+> Referência do motor e da CLI originais. A plataforma v2, sua operação e as evidências adicionais estão em [ENTREGA_FINAL.md](ENTREGA_FINAL.md).
+
 ## 1. Problema e decisão de arquitetura — 45 segundos
 
 “O OTM faz o rateio matemático por SKU, mas o faturamento precisa respeitar o conjunto comercial e a embalagem física. Minha proposta é uma camada tática após o OTM. Ela não muda o legado: recebe os cinco arquivos, aplica restrições e produz uma proposta auditável, com fila de exceções.”
